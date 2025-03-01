@@ -86,24 +86,6 @@
     ```bash
     npm i
     ```
-    
-- Ao ter o projeto na sua máquina você deve abrir a api e também o site. Para isso siga os passos abaixo:
-  - Abra o terminal e escreva o código abaixo para iniciar a api:
-    - 1:
-      ```bash
-      cd src/api
-        ```
-      
-    - 2:
-        ```bash
-        npm start
-        ```
-      
-  - Para abrir o site rode o comando:
-    ```bash
-    npm run dev
-    ```
-    
 
 - Pronto! Todo o site estará funcionado na sua máquina. Porém, caso precise de alguma ajuda em algo entre em contato comigo pelo meu LinkedIn: https://www.linkedin.com/in/guilherme-francisco-pereira-4a3867283
 
@@ -117,6 +99,9 @@
 #
 
 ### ❤️ Créditos:
+
+#### Crédito dos svg utilizados na landing page (UTILIZANDO O HTML COM SVG):
+> <a href="https://icons.getbootstrap.com" target="_blank">https://icons.getbootstrap.com</a>
 
 #### Créditos dos emojis: 
 > <a href="https://emojipedia.org" target="_blank">https://emojipedia.org</a>
