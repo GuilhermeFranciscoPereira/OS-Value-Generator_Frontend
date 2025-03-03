@@ -1,0 +1,83 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.formContainer > h2 {
+    font-size: 22px;
+    margin: 20px 0;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--Green-Primary);
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup > label {
+    display: block;
+    text-align: start;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formGroup > select, .formGroup > input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.formGroup > select:focus, .formGroup > input:focus {
+    outline: none;
+    border-color: var(--Green-Secondary);
+}
+
+.formGroup > select {
+    height: 40px;
+    cursor: pointer;
+}
+
+.formGroup > .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.submitBtn {
+    font-size: 18px;
+    padding: 12px 20px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: .3s ease;
+    background-color: var(--Green-Primary);
+}
+
+.submitBtn:hover {
+    background-color: var(--Green-Secondary);
+}
+
+@media (max-width: 480px) {
+    .formContainer > h2 {
+        font-size: 20px;
+    }
+
+    .formGroup > label, .formGroup > select, .formGroup > input {
+        font-size: 14px;
+    }
+}

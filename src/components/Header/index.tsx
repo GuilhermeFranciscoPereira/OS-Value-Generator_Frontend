@@ -18,7 +18,7 @@ export default function Header(): React.ReactNode {
             <div>
                 <h2>Total de funcionários</h2>
                 <div>
-                    <p>7</p>
+                    <p>10</p>
                 </div>
             </div>
         </header>

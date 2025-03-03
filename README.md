@@ -28,12 +28,18 @@
 
     - Next
     - React
+        - react-hook-form
+        - react-select
+        - zod
     - Typescript
     - Css Modules
 
 ## Versões utilizadas:
     - Next: 15.2.0
     - React: 19.0.0
+        - react-hook-form: 7.54.2
+        - react-select: 5.10.0
+        - zod: 3.24.2
     - Typescript: 5
 
 ## 🙋🏻‍♂ Como me localizar no projeto?
@@ -43,6 +49,27 @@
 ## 🛈 Como o projeto está estruturado
 
 - `./src/app:` Este projeto é em Next e usando o App Router, temos a estrutura sendo chamada em page.tsx.
+
+- `./src/components:` Onde está os componentes que serão reutilizados em diversas partes do código. Neste projeto temos os components:
+    - Form: Formulários
+        - CreateNewOS: Para criação de novas OS, acionado após clicar no botão de "Gerar nova OS"
+    - Header: Cabeçalho que se encontra no canto superior direito do sistema e aparece na tela principal
+    - Modal: Esqueleto do modal, criado esse componente para fazer um modal que seja reutilizado de diversas formas
+    - Sidebar: Barra lateral esquerda do site
+    - Toast: Componente do toast ( Aquela informação que aparece de sucesso ou erro no canto inferior direito quando realiza alguma ação )
+
+- `./src/contexts:` Os contexts são onde separamos os dados e funções que serão compartilhados com toda a aplicação, neste projeto é onde está os contextos de:
+    - ModalContext: Todo o contexto e a parte lógica do modal.
+    - ToastContext: Todo o contexto e a parte lógica do toast.
+    - Vale ressaltar que o arquivo 'AppProvider.tsx' é o responsável por agrupar todos os providers dos contextos e exportar como um arquivo único. 
+
+- `./src/hooks:` Está nossos hooks personalizados com as partes lógicas de todos os nossos componentes:
+    - Apis:
+        - Post:
+            - useCreateNewOS: Parte lógica da componente: Form/CreateNewOS
+    - useSideBar: Parte lógica do componente: Sidebar
+
+- `./src/services:` Pasta que contém as funcionalidades de serviço. Temos um único arquivo chamado "QueryClient.tsx" que serve somente para criarmos um QueryClient e exportar o provider neste próprio arquivo, uma vez que assim podemos usar a diretiva 'use client' no arquivo e não no layout da aplicação.
 
 - `./src/styles:` Pasta que contém os arquivos de estilização. Nesta primeira versão temos também um único arquivo, chamado "GlobalStyles.css", este arquivo fica responsável pelos códigos que são de estilização globais do projeto.
 

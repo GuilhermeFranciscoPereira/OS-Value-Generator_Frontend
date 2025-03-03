@@ -1,0 +1,58 @@
+.modalSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.modalSection > .modalDiv {
+    text-align: center;
+    padding: 20px;
+    max-width: 500px;
+    max-height: 95vh;
+    width: 90%;
+    overflow-y: auto;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 30px;
+    box-shadow: 2px 2px 10px white;
+}
+
+.modalSection > .modalDiv > .modalClose {
+    position: relative;
+    cursor: pointer;
+    right: -35%;
+    padding: 5px;
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: red;
+    border: 2px solid red;
+    border-radius: 30px;
+    box-shadow: 5px 5px 7px red;
+    transition: .3s ease;
+}
+
+.modalSection > .modalDiv > .modalClose:hover {
+    color: white;
+    background-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 3px 3px 7px var(--Red-primary-color);
+}
+
+@media (max-width: 480px) {
+    .modalSection > .modalDiv > .modalClose {
+        font-size: 10px;
+    }
+}
+
+/* Scroll-Bar Style */
+::-webkit-scrollbar {
+    display: none;
+}
