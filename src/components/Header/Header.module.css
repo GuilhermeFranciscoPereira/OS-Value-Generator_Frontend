@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-around;
     flex: 1;
-    height: 28vh;
+    height: 30vh;
     margin: 0px 20px;
     border: 1px solid var(--Grey-Primary);
     border-top: none;
@@ -69,6 +69,12 @@
 .header > div:nth-child(3) > .borderInformations > h3 > span {
     color: red;
 } 
+
+@media screen and (max-width: 1200px) {
+    .header {
+        height: fit-content;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .header {

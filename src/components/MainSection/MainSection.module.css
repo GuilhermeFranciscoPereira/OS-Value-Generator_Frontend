@@ -1,5 +1,5 @@
 .mainSection {
-    max-height: 72vh;
+    min-height: 70vh;
     margin: 20px;
 }
 
@@ -51,4 +51,11 @@
 
 .table > tbody > tr:nth-child(even) {
     background-color: #c9eeda;
+}
+
+@media screen and (max-width: 768px) {
+    .mainSection {
+        margin: 20px 2.5vw;
+        width: 95vw;
+    }
 }
