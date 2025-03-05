@@ -1,18 +1,19 @@
 'use client';
+import Select from 'react-select';
+import { MultiValue } from 'react-select';
 import { Controller } from 'react-hook-form';
 import styles from './CreateNewOS.module.css';
-import Select, { MultiValue } from 'react-select';
-import { useCreateNewOS } from '@/hooks/Apis/Post/useCreateNewOS';
+import usePostNewOS from '@/hooks/Apis/Post/usePostNewOS';
 
 type optionsProps = {
-  value: string,
-  label: string
-}
+  value: string;
+  label: string;
+};
 
 export default function CreateNewOS(): React.ReactNode {
-  const { control, handleSubmit, submitForm, errors, employees, clientName, travelTime, workTime, handleEmployeesChange, handleClientNameChange, handleTravelTimeChange, handleWorkTimeChange } = useCreateNewOS();
+  const { control, handleSubmit, submitForm, errors } = usePostNewOS();
 
-  const options: Array<optionsProps> = [
+  const options: optionsProps[] = [
     { value: 'Adilson', label: 'Adilson' },
     { value: 'Daniel', label: 'Daniel' },
     { value: 'Eliseu', label: 'Eliseu' },
@@ -41,9 +42,12 @@ export default function CreateNewOS(): React.ReactNode {
               options={options}
               classNamePrefix="react-select"
               onChange={(newValue: MultiValue<{ value: string; label: string }>) => {
-                handleEmployeesChange(newValue.map((item) => item.value));
+                field.onChange(newValue.map((item) => item.value));
               }}
-              value={employees.map((emp) => ({ value: emp, label: emp }))}
+              value={field.value?.map((emp: string) => ({
+                value: emp,
+                label: emp
+              }))}
             />
           )}
         />
@@ -52,40 +56,55 @@ export default function CreateNewOS(): React.ReactNode {
 
       <div className={styles.formGroup}>
         <label htmlFor="clientName">Nome do cliente</label>
-        <input
-          type="string"
-          id="clientName"
-          value={clientName}
-          onChange={handleClientNameChange}
-          placeholder="Nome do cliente"
-          required
-          minLength={1}
+        <Controller
+          name="clientName"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              type="string"
+              id="clientName"
+              placeholder="Nome do cliente"
+              required
+              minLength={1}
+            />
+          )}
         />
-        {errors.travelTime && <p className={styles.error}>{errors.travelTime.message}</p>}
+        {errors.clientName && <p className={styles.error}>{errors.clientName.message}</p>}
       </div>
 
       <div className={styles.formGroup}>
         <label htmlFor="travelTime">Tempo de viagem</label>
-        <input
-          type="number"
-          id="travelTime"
-          value={travelTime}
-          onChange={handleTravelTimeChange}
-          required
-          min={1}
+        <Controller
+          name="travelTime"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              type="number"
+              id="travelTime"
+              required
+              min={1}
+            />
+          )}
         />
         {errors.travelTime && <p className={styles.error}>{errors.travelTime.message}</p>}
       </div>
 
       <div className={styles.formGroup}>
         <label htmlFor="workTime">Tempo trabalhado</label>
-        <input
-          type="number"
-          id="workTime"
-          value={workTime}
-          onChange={handleWorkTimeChange}
-          required
-          min={1}
+        <Controller
+          name="workTime"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              type="number"
+              id="workTime"
+              required
+              min={1}
+            />
+          )}
         />
         {errors.workTime && <p className={styles.error}>{errors.workTime.message}</p>}
       </div>

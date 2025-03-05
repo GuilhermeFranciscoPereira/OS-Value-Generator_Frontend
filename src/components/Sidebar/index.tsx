@@ -3,9 +3,11 @@ import Image from 'next/image';
 import ProteltLogo from '@/app/favicon.ico';
 import useSidebar from '@/hooks/useSidebar';
 import styles from '@/components/Sidebar/Sidebar.module.css';
+import useGetByClientName from '@/hooks/Apis/Get/useGetByClientName';
 
 export default function Sidebar(): React.ReactNode {
-    const {functionToCreateNewOS, functionToSeeAllWorkers} = useSidebar();
+    const { functionToCreateNewOS, functionToSeeAllWorkers } = useSidebar();
+    const { clientName, handleClientNameChange, clearInput } = useGetByClientName();
 
     return (
         <aside className={styles.aside}>
@@ -23,10 +25,20 @@ export default function Sidebar(): React.ReactNode {
                 <ul>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M5 0h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2 2 2 0 0 1-2 2H3a2 2 0 0 1-2-2h1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1H1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v9a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1H3a2 2 0 0 1 2-2" />
-                            <path d="M1 6v-.5a.5.5 0 0 1 1 0V6h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V9h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 2.5v.5H.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1H2v-.5a.5.5 0 0 0-1 0" />
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
-                        <p>Visualizar todas OS</p>
+                        <div className={styles.inputContainer}>
+                            <input
+                                type="text"
+                                value={clientName}
+                                onChange={handleClientNameChange}
+                                placeholder="Buscar por nome do cliente"
+                            />
+                            <svg onClick={() => { clearInput() }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                            </svg>
+                        </div>
                     </li>
                     <li onClick={() => functionToCreateNewOS()}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

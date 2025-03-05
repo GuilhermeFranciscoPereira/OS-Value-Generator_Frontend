@@ -73,6 +73,7 @@
 @media screen and (max-width: 1200px) {
     .header {
         height: fit-content;
+        padding: 10px 0px;
     }
 }
 

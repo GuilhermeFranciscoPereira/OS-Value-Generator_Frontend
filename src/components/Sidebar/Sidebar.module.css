@@ -39,6 +39,16 @@
     cursor: pointer;
 }
 
+.aside > .options > ul > li:nth-child(1) {
+    padding: 5px 0px 5px 20px;
+    cursor: default;
+}
+
+.aside > .options > ul > li:nth-child(1):hover {
+    background-color: white;
+    color: black;
+}
+
 .aside > .options > ul > li:hover {
     background-color: var(--Green-Primary);
     color: white;
@@ -46,6 +56,36 @@
 
 .aside > .options > ul > li > svg {
     margin-right: 20px;
+}
+
+/* FORM TO GET BY CLIENT NAME */
+.inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 10px;
+    border-radius: 12px;
+    border: 2px solid var(--Grey-Primary);
+}
+
+.inputContainer > input {
+    width: 90%;
+    font-size:18px;
+    border: none;
+    outline: none;
+}
+
+.inputContainer > svg {
+    cursor: pointer;
+}
+
+.inputContainer:hover, .inputContainer:focus {
+    border: 2px solid var(--Green-Primary);
+}
+
+.inputContainer:hover > svg, .inputContainer:focus > svg {
+    color: red;
 }
 
 @media screen and (max-width: 768px) {
@@ -56,10 +96,19 @@
     }
     
     .aside > .options > ul > li {
-        font-size: 2rem;
+        font-size: 1.7rem;
         padding: 10px 0px;
         margin: 10px 10px;
         border-bottom: 1px solid var(--Grey-Primary);
     }
 
+    .inputContainer {
+        width: 100vw;
+        border-radius: 12px;
+    }
+
+    .inputContainer > input {
+        font-size: 1.7rem;
+    }
+    
 }

@@ -30,8 +30,8 @@
     position: relative;
     cursor: pointer;
     right: -35%;
-    padding: 5px;
     font-size: 18px;
+    padding: 5px;
     margin-bottom: 20px;
     color: red;
     border: 2px solid red;
@@ -44,12 +44,6 @@
     color: white;
     background-color: rgba(255, 0, 0, 0.3);
     box-shadow: 3px 3px 7px var(--Red-primary-color);
-}
-
-@media (max-width: 480px) {
-    .modalSection > .modalDiv > .modalClose {
-        font-size: 10px;
-    }
 }
 
 /* Scroll-Bar Style */
