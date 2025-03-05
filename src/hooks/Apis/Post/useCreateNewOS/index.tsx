@@ -43,7 +43,7 @@ export const useCreateNewOS = () => {
   };
 
   const handleClientNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newClientName = (e.target.value).toUpperCase();
+    const newClientName = (e.target.value).toLowerCase().replace(/\b\w/g, letter => letter.toUpperCase()); //The first letter in each word Will be in upper case, for instance: Guilherme Pereira
     setClientName(newClientName);
     setValue('clientName', newClientName);
   };

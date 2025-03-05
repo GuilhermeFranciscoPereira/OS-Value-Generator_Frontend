@@ -66,10 +66,12 @@
     cursor: pointer;
     transition: .3s ease;
     background-color: var(--Green-Primary);
+    transition: .4 ease-in-out;
 }
 
 .submitBtn:hover {
-    background-color: var(--Green-Secondary);
+    transform: scale(1.1);
+    border-radius: 12px;
 }
 
 @media (max-width: 480px) {

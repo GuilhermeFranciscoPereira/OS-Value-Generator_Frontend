@@ -13,6 +13,7 @@
 
 .aside > .headline > .headlineTexts > h1 {
     font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .aside > .headline > .headlineTexts > p {

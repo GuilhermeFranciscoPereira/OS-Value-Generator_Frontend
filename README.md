@@ -54,6 +54,7 @@
     - Form: Formulários
         - CreateNewOS: Para criação de novas OS, acionado após clicar no botão de "Gerar nova OS"
     - Header: Cabeçalho que se encontra no canto superior direito do sistema e aparece na tela principal
+    - MainSection: Conteudo que fica no canto esquerdo logo a baixo do Header na tela principal
     - Modal: Esqueleto do modal, criado esse componente para fazer um modal que seja reutilizado de diversas formas
     - Sidebar: Barra lateral esquerda do site
     - Toast: Componente do toast ( Aquela informação que aparece de sucesso ou erro no canto inferior direito quando realiza alguma ação )
