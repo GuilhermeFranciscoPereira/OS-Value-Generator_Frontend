@@ -1,9 +1,9 @@
+import '@/styles/GlobalStyles.css';
 import type { Metadata } from "next";
 import Toast from "@/components/Toast";
 import Modal from "@/components/Modal";
 import AppProvider from "@/contexts/AppProvider";
 import ToQueryClientProvider from "@/services/queryClient";
-import '@/styles/GlobalStyles.css';
 
 export const metadata: Metadata = {
   title: "Gerador de valor de OS",

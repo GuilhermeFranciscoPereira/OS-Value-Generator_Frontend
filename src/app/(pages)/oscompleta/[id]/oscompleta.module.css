@@ -1,0 +1,103 @@
+button.buttonToCaptureTheScreen {
+    position: fixed;
+    top: 40px;
+    right: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 15px;
+    background-color: var(--Green-Secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button.buttonToCaptureTheScreen:hover {
+    background-color: var(--Green-Primary);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+button.buttonToCaptureTheScreen:active {
+    background-color: var(--Grey-Secondary);
+    transform: translateY(5px);
+}
+
+button.buttonToCaptureTheScreen:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 188, 106, 0.3);
+}
+
+
+.main > .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0px 10px 0px;
+    gap: 10px;
+}
+
+.sectionContent {
+    border: 2px solid rgba(0, 0, 0, 0.7);
+}
+
+.sectionContent > h1 {
+    text-align: center;
+    font-weight: 500;
+    background-color: #eee;
+}
+
+.sectionContent > div {
+    border: 1px solid black;
+}
+
+.sectionContent > div > .label {
+    font-weight: 700;
+}
+
+.sectionContent > div > .value {
+    text-transform: uppercase;
+}
+
+.label, .value {
+    display: block;
+}
+
+/* This is a grid template area, I used 7 columns so there are 7 items in each quote */
+.sectionContent {
+    border: 2px solid rgba(0, 0, 0, 0.7);
+    display: grid;
+    width: 95vw;
+    font-size: 20px;
+    margin: 0px auto 10px auto;
+    grid-template-areas: 
+    'ValorDaOrdemDeServico ValorDaOrdemDeServico ValorDaOrdemDeServico ValorDaOrdemDeServico ValorDaOrdemDeServico ValorDaOrdemDeServico ValorDaOrdemDeServico'
+    'osCriadaPor osCriadaPor osCriadaPor osCriadaPor autoDaInfracao autoDaInfracao dataEnvio'
+    'valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS dataHoraDaCriacaoOS'
+    'comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado'
+    'transporte transporte transporte transporte transporte transporteKMTotal transporteValorFinal'
+    'trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores valorTrabalhadores'
+    'materiais materiais materiais materiais materiais materiais materiais'
+    'imposto imposto imposto imposto imposto imposto imposto'
+    'grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRiscoValor'
+    'recurso recurso recurso recurso recurso recurso recurso'
+}
+
+/* Here it's the identification to the grid template area */
+.osCriadaPor {grid-area: osCriadaPor;}
+.autoDaInfracao {grid-area: autoDaInfracao;}
+.dataEnvio {grid-area: dataEnvio;}
+.ValorDaOrdemDeServico {grid-area: ValorDaOrdemDeServico;}
+.valorTotalDaOS {grid-area: valorTotalDaOS;}
+.comoOValoreGerado {grid-area: comoOValoreGerado;}
+.trabalhadores {grid-area: trabalhadores;}
+.imposto {grid-area: imposto;}
+.transporte {grid-area: transporte;}
+.materiais {grid-area: materiais;}
+.grauDeRisco {grid-area: grauDeRisco;}
+.dataHoraDaCriacaoOS {grid-area: dataHoraDaCriacaoOS;}
+.recurso {grid-area: recurso;}

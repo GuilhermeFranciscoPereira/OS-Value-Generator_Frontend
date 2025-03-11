@@ -5,10 +5,16 @@ import { useToastContext } from '@/contexts/ToastContext';
 import { useModalContext } from '@/contexts/ModalContext';
 
 type FormDataProps = {
-  employees: string[];
+  employees: Array<string>;
   clientName: string;
   travelTime: string | number;
   workTime: string | number;
+};
+
+type DatasToPostInBackEndProps = {
+  employees: string;
+  clientName: string;
+  osValue: number;
 };
 
 const schema = z.object({
@@ -33,11 +39,13 @@ export default function usePostNewOS() {
   });
 
   function submitForm(data: FormDataProps): void {
-    const formData: FormDataProps = {
-      employees: data.employees,
+    const employeesAsString: string = (data.employees).join("; ");
+    const osValue: number = (Number(data.travelTime) * Number(data.workTime))
+
+    const formData: DatasToPostInBackEndProps = {
+      employees: employeesAsString,
       clientName: data.clientName,
-      travelTime: Number(data.travelTime),
-      workTime: Number(data.workTime),
+      osValue: osValue
     };
 
     showToast({ message: 'OS criada com sucesso!', backgroundColor: '#3bb448' });

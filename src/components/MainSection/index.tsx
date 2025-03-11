@@ -1,6 +1,10 @@
+'use client';
 import styles from '@/components/MainSection/MainSection.module.css';
+import useMainSection from '@/hooks/useMainSection';
 
 export default function MainSection(): React.ReactNode {
+    const { handleSeeAllOS } = useMainSection();
+
     return (
         <main className={styles.mainSection}>
             <table className={styles.table}>
@@ -19,7 +23,7 @@ export default function MainSection(): React.ReactNode {
                         <td>Matheus</td>
                         <td>
                             <ul>
-                                <li> {/* Eye icon to the action: See the OS*/}
+                                <li onClick={() => { handleSeeAllOS(1) }}> {/* Eye icon to the action: See the OS*/}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="Blue" viewBox="0 0 16 16">
                                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
