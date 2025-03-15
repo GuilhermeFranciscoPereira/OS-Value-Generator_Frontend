@@ -1,6 +1,8 @@
 .aside {
+    height: 100vh;
     width: 25vw;
     border-right: 1px solid var(--Grey-Primary);
+    position: fixed;
 }
 
 .aside > .headline {

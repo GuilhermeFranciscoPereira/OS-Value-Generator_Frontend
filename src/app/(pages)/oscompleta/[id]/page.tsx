@@ -4,9 +4,11 @@ import Image from "next/image";
 import proteltLogo from '@/assets/proteltlogo.png';
 import useOsCompleta from '@/hooks/Pages/useOsCompleta';
 import styles from '@/app/(pages)/oscompleta/[id]/oscompleta.module.css';
+import { useFiltersContext } from "@/contexts/FiltersContext";
 
 export default function oscompleta(): React.ReactNode {
-    const { captureScreenshot, SearchByIdContent, dateAndHourFormated } = useOsCompleta();
+    const { captureScreenshot, SearchByIdContent, dateAndHourFormated, workedTime } = useOsCompleta();
+    const { toSetFiltersHowActive } = useFiltersContext();
 
     return (
         <>
@@ -15,8 +17,8 @@ export default function oscompleta(): React.ReactNode {
             </button>
             <main id="sectionToCaptureScreen" className={styles.main}>
                 <header className={styles.header}>
-                    <Link href={'/'}>
-                        <Image src={proteltLogo} width={200} alt={`Foto do condomínio vila real`} quality={100} />
+                    <Link href={'/'} onClick={() => toSetFiltersHowActive(false)}>
+                        <Image src={proteltLogo} width={200} alt={`Foto da logo da Protelt`} quality={100} />
                     </Link>
                 </header>
                 <section className={styles.sectionContent}>
@@ -37,7 +39,7 @@ export default function oscompleta(): React.ReactNode {
 
                     <div className={styles.valorTotalDaOS}>
                         <span className={styles.label}>Valor total da ordem de serviço</span>
-                        <span className={styles.value}>R$ {SearchByIdContent[0].osValue},00</span>
+                        <span className={styles.value}>{(SearchByIdContent[0].fullOsValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.dataHoraDaCriacaoOS}>
                         <span className={styles.label}>Ordem criada em</span>
@@ -52,24 +54,28 @@ export default function oscompleta(): React.ReactNode {
                         <span className={styles.value}>R$ 1,90 por KM</span>
                     </div>
                     <div className={styles.transporteKMTotal}>
-                        <span className={styles.label}>KM Rodado até o cliente</span>
-                        <span className={styles.value}>{59} KM</span>
+                        <span className={styles.label}>KM Total</span>
+                        <span className={styles.value}>{SearchByIdContent[0].fullKM} KM</span>
                     </div>
                     <div className={styles.transporteValorFinal}>
                         <span className={styles.label}>Total do transporte</span>
-                        <span className={styles.value}>R$ {59},00</span>
+                        <span className={styles.value}>{(SearchByIdContent[0].fullKM * 1.07).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.trabalhadores}>
                         <span className={styles.label}>Trabalhadores</span>
                         <span className={styles.value}>{SearchByIdContent[0].employees}</span>
                     </div>
+                    <div className={styles.tempoTrabalhado}>
+                        <span className={styles.label}>Tempo de trabalho</span>
+                        <span className={styles.value}>{workedTime}</span>
+                    </div>
                     <div className={styles.valorTrabalhadores}>
                         <span className={styles.label}>Valor total</span>
-                        <span className={styles.value} style={{ textAlign: "end" }}>R$ {59},00</span>
+                        <span className={styles.value} style={{ textAlign: "end" }}>{(SearchByIdContent[0].employeesValue * SearchByIdContent[0].workedTime).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.materiais}>
                         <span className={styles.label}>Materiais</span>
-                        <span className={styles.value} style={{ textAlign: "end" }}>R$ {192},00</span>
+                        <span className={styles.value} style={{ textAlign: "end" }}>{(SearchByIdContent[0].materialsValue).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.imposto}>
                         <span className={styles.label}>Imposto</span>
@@ -80,12 +86,12 @@ export default function oscompleta(): React.ReactNode {
                         <span className={styles.value}>O grau de risco do serviço é determinado com base em uma avaliação detalhada dos fatores como local, complexidade e riscos envolvidos na atividade. O grau de risco influencia diretamente o custo do serviço, pois implica em medidas de segurança adicionais e precauções especiais durante a execução</span>
                     </div>
                     <div className={styles.grauDeRiscoValor}>
-                        <span className={styles.label}>Essa OS foi grau de nivel {3} equivalente à</span>
-                        <span className={styles.value}>R$ {350},00</span>
+                        <span className={styles.label}>Essa OS foi grau de nivel {SearchByIdContent[0].degreeOfRisk} equivalente à</span>
+                        <span className={styles.value}>{(SearchByIdContent[0].degreeOfRisk).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.recurso}>
                         <span className={styles.label}>Recurso</span>
-                        <span className={styles.value} style={{ textAlign: "end" }}>Caso deseje saber mais sobre a ordem de serviço entre em contato no número: +55 11 98546-0303</span>
+                        <span className={styles.value} style={{ textAlign: "end" }}>Caso deseje saber mais sobre a ordem de serviço entre em contato com o número: +55 11 98546-0303</span>
                     </div>
                 </section>
             </main>

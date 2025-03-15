@@ -2,32 +2,14 @@
 import Select from 'react-select';
 import { MultiValue } from 'react-select';
 import { Controller } from 'react-hook-form';
-import styles from './CreateNewOS.module.css';
+import styles from '@/components/Form/Form.module.css';
 import usePostNewOS from '@/hooks/Apis/Post/usePostNewOS';
 
-type optionsProps = {
-  value: string;
-  label: string;
-};
-
 export default function CreateNewOS(): React.ReactNode {
-  const { control, handleSubmit, submitForm, errors } = usePostNewOS();
-
-  const options: optionsProps[] = [
-    { value: 'Adilson', label: 'Adilson' },
-    { value: 'Daniel', label: 'Daniel' },
-    { value: 'Eliseu', label: 'Eliseu' },
-    { value: 'Kaique', label: 'Kaique' },
-    { value: 'Kauã', label: 'Kauã' },
-    { value: 'Kleber', label: 'Kleber' },
-    { value: 'Joas', label: 'Joas' },
-    { value: 'Matheus', label: 'Matheus' },
-    { value: 'Patric', label: 'Patric' },
-    { value: 'Wesley', label: 'Wesley' }
-  ];
+  const { control, handleSubmit, submitForm, options, errors } = usePostNewOS();
 
   return (
-    <form onSubmit={handleSubmit(submitForm)} className={styles.formContainer}>
+    <form onSubmit={handleSubmit(submitForm)} className={styles.formContainer} encType="multipart/form-data">
       <h2>Criar nova ordem de serviço</h2>
 
       <div className={styles.formGroup}>
@@ -74,39 +56,74 @@ export default function CreateNewOS(): React.ReactNode {
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="travelTime">Tempo de viagem</label>
+        <label htmlFor="fullKM">KM Total</label>
         <Controller
-          name="travelTime"
+          name="fullKM"
           control={control}
           render={({ field }) => (
             <input
               {...field}
               type="number"
-              id="travelTime"
+              id="fullKM"
               required
               min={1}
             />
           )}
         />
-        {errors.travelTime && <p className={styles.error}>{errors.travelTime.message}</p>}
+        {errors.fullKM && <p className={styles.error}>{errors.fullKM.message}</p>}
       </div>
 
       <div className={styles.formGroup}>
-        <label htmlFor="workTime">Tempo trabalhado</label>
+        <label htmlFor="workedTime">Tempo trabalhado - ( <span style={{ color: "#d83734" }}>Em minutos</span> )</label>
         <Controller
-          name="workTime"
+          name="workedTime"
           control={control}
           render={({ field }) => (
             <input
               {...field}
               type="number"
-              id="workTime"
+              id="workedTime"
               required
               min={1}
             />
           )}
         />
-        {errors.workTime && <p className={styles.error}>{errors.workTime.message}</p>}
+        {errors.workedTime && <p className={styles.error}>{errors.workedTime.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="degreeOfRisk">Grau de risco - ( <span style={{ color: "#d83734" }}>De 1 à 5</span> )</label>
+        <Controller
+          name="degreeOfRisk"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              type="number"
+              id="degreeOfRisk"
+              required
+              min={1}
+              max={5}
+            />
+          )}
+        />
+        {errors.degreeOfRisk && <p className={styles.error}>{errors.degreeOfRisk.message}</p>}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="materialsValue">Valores de material</label>
+        <Controller
+          name="materialsValue"
+          control={control}
+          render={({ field }) => (
+            <input
+              {...field}
+              id="materialsValue"
+              min={0}
+            />
+          )}
+        />
+        {errors.materialsValue && <p className={styles.error}>{errors.materialsValue.message}</p>}
       </div>
 
       <div>

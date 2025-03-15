@@ -27,6 +27,7 @@ html, body {
 
 .content > .mainContent {
     width: 75vw;
+    margin-left: 25vw;
 }
 
 @media screen and (max-width: 768px) {

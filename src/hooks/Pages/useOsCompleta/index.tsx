@@ -23,8 +23,20 @@ export default function useOsCompleta() {
     }
   }
 
-  const dateAndHourNotFormated = new Date(SearchByIdContent[0]?.dateAndHour);
+  const dateAndHourNotFormated = new Date(SearchByIdContent[0]?.dateAndHourOfCreationOS);
   const dateAndHourFormated = `${String(dateAndHourNotFormated.getDate()).padStart(2, '0')}/${String(dateAndHourNotFormated.getMonth() + 1).padStart(2, '0')}/${dateAndHourNotFormated.getFullYear()} - ${String(dateAndHourNotFormated.getHours()).padStart(2, '0')}:${String(dateAndHourNotFormated.getMinutes()).padStart(2, '0')}`;
 
-  return { captureScreenshot, SearchByIdContent, dateAndHourFormated };
+  const workedTimeInMinutes: number = SearchByIdContent[0].workedTime;
+  const hours: number = Math.floor(workedTimeInMinutes / 60);
+  const minutes: number = workedTimeInMinutes % 60;
+  let workedTime: string = '';
+  if (hours > 0) {
+    workedTime += `${hours} hora${hours > 1 ? 's' : ''}`;
+  }
+  if (minutes > 0) {
+    if (workedTime) workedTime += ' e ';
+    workedTime += `${minutes} minuto${minutes > 1 ? 's' : ''}`;
+  }
+  
+  return { captureScreenshot, SearchByIdContent, dateAndHourFormated, workedTime };
 }

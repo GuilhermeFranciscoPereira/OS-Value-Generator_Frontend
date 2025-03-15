@@ -4,8 +4,13 @@ type ContentOsProps = {
     id: number;
     employees: string;
     clientName: string;
-    osValue: number;
-    dateAndHour: string;
+    fullOsValue: number;
+    degreeOfRisk: number;
+    materialsValue: number;
+    fullKM: number;
+    workedTime: number;
+    employeesValue: number;
+    dateAndHourOfCreationOS: string
 }
 
 type SearchByIdContextProps = {

@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToastContext } from '@/contexts/ToastContext';
 import { useModalContext } from '@/contexts/ModalContext';
+import { useSearchByIdContext } from '@/contexts/SearchByIdContext';
 import useGetAllOS from '../../Get/useGetAllOS';
 
 type FormDataProps = {
@@ -16,7 +17,7 @@ type FormDataProps = {
   degreeOfRisk: string | number;
 };
 
-type DatasToPostInBackEndProps = {
+type DatasToPatchInBackEndProps = {
   employees: string;
   clientName: string;
   fullOsValue: number;
@@ -36,9 +37,10 @@ const schema = z.object({
   materialsValue: z.union([z.number(), z.string()]),
 });
 
-export default function usePostOS() {
+export default function usePatchOS() {
   const { showToast } = useToastContext();
   const { toggleModalState } = useModalContext();
+  const { SearchByIdContent } = useSearchByIdContext();
   const { refetchTheGetAllOS } = useGetAllOS();
 
   const options: Array<{ value: string; label: string }> = [
@@ -57,16 +59,16 @@ export default function usePostOS() {
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     resolver: zodResolver(schema),
     defaultValues: {
-      employees: [],
-      clientName: '',
-      fullKM: 0,
-      workedTime: 0,
-      degreeOfRisk: 0,
-      materialsValue: 0,
+      employees: (SearchByIdContent[0].employees).split(',').map(item => item.trim()),
+      clientName: SearchByIdContent[0].clientName,
+      fullKM: SearchByIdContent[0].fullKM,
+      workedTime: SearchByIdContent[0].workedTime,
+      degreeOfRisk: SearchByIdContent[0].degreeOfRisk,
+      materialsValue: SearchByIdContent[0].materialsValue,
     },
   });
 
-  const postNewOS = async (formData: DatasToPostInBackEndProps) => {
+  const patchOS = async (formData: DatasToPatchInBackEndProps) => {
     const api = axios.create({
       baseURL: 'http://localhost:7777',
       headers: {
@@ -74,19 +76,19 @@ export default function usePostOS() {
       },
     });
 
-    const response = await api.post('/allOS', formData);
+    const response = await api.patch(`/allOS/PATCH/${SearchByIdContent[0].id}`, formData);
     return response.data;
   };
 
   const mutation = useMutation({
-    mutationFn: postNewOS,
+    mutationFn: patchOS,
     onSuccess: () => {
       toggleModalState();
-      showToast({ message: 'OS criada com sucesso!', backgroundColor: '#3bb448' });
+      showToast({ message: 'OS editada com sucesso!', backgroundColor: '#3bb448' });
       refetchTheGetAllOS();
     },
     onError: (error: any) => {
-      showToast({ message: `Erro ao criar OS! Erro: ${error.message}`, backgroundColor: '#d83734' });
+      showToast({ message: `Erro ao editar OS! Erro: ${error.message}`, backgroundColor: '#d83734' });
       refetchTheGetAllOS();
     }
   });
@@ -103,9 +105,9 @@ export default function usePostOS() {
       };
     });
 
-    const formData: DatasToPostInBackEndProps = {
+    const formData: DatasToPatchInBackEndProps = {
       employees: data.employees.join(", "),
-      clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()),
+      clientName: (data.clientName).toUpperCase(),
       fullOsValue: fullOsValue,
       degreeOfRisk: data.degreeOfRisk,
       materialsValue: data.materialsValue,

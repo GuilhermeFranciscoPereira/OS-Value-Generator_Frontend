@@ -65,6 +65,7 @@ button.buttonToCaptureTheScreen:focus {
 
 .label, .value {
     display: block;
+    padding: 1px 2px;
 }
 
 /* This is a grid template area, I used 7 columns so there are 7 items in each quote */
@@ -80,7 +81,7 @@ button.buttonToCaptureTheScreen:focus {
     'valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS dataHoraDaCriacaoOS'
     'comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado'
     'transporte transporte transporte transporte transporte transporteKMTotal transporteValorFinal'
-    'trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores valorTrabalhadores'
+    'trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores tempoTrabalhado valorTrabalhadores'
     'materiais materiais materiais materiais materiais materiais materiais'
     'imposto imposto imposto imposto imposto imposto imposto'
     'grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRiscoValor'

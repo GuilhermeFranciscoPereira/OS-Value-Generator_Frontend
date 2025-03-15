@@ -1,6 +1,6 @@
 'use client'
-import CreateNewOS from "@/components/Form/CreateNewOS";
 import SeeAllWorkers from "@/components/SeeAllWorkers";
+import CreateNewOS from "@/components/Form/CreateNewOS";
 import { useModalContext } from "@/contexts/ModalContext";
 
 type useSidebarProps = {
@@ -9,7 +9,7 @@ type useSidebarProps = {
 }
 
 export default function useSidebar(): useSidebarProps {
-    const {toSetModalContent, toggleModalState} = useModalContext();
+    const { toSetModalContent, toggleModalState } = useModalContext();
 
     function functionToCreateNewOS() {
         toSetModalContent(<CreateNewOS></CreateNewOS>)
@@ -21,5 +21,5 @@ export default function useSidebar(): useSidebarProps {
         toggleModalState();
     }
 
-    return {functionToCreateNewOS, functionToSeeAllWorkers}
+    return { functionToCreateNewOS, functionToSeeAllWorkers }
 }
