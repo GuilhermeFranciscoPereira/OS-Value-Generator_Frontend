@@ -22,7 +22,7 @@ button.buttonToCaptureTheScreen:hover {
 }
 
 button.buttonToCaptureTheScreen:active {
-    background-color: var(--Grey-Secondary);
+    background-color: var(--Grey-Primary);
     transform: translateY(5px);
 }
 

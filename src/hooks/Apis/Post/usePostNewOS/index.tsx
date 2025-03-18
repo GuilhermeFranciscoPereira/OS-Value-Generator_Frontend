@@ -88,7 +88,7 @@ export default function usePostOS() {
     onError: (error: any) => {
       showToast({ message: `Erro ao criar OS! Erro: ${error.message}`, backgroundColor: '#d83734' });
       refetchTheGetAllOS();
-    }
+    },
   });
 
   function submitForm(data: FormDataProps): void {
@@ -105,7 +105,7 @@ export default function usePostOS() {
 
     const formData: DatasToPostInBackEndProps = {
       employees: data.employees.join(", "),
-      clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()),
+      clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase()),
       fullOsValue: fullOsValue,
       degreeOfRisk: data.degreeOfRisk,
       materialsValue: data.materialsValue,

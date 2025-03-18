@@ -43,7 +43,7 @@
 }
 
 .table > thead > tr > th {
-    background-color: #8ddab0;
+    background-color: var(--Green-Secondary);
     font-weight: 400;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .table > tbody > tr:nth-child(even) {
-    background-color: #c9eeda;
+    background-color: var(--Green-Third);
 }
 
 @media screen and (max-width: 768px) {

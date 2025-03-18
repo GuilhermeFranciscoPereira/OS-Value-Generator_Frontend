@@ -1,14 +1,8 @@
 import { useSearchByIdContext } from "@/contexts/SearchByIdContext";
-import { useRouter } from "next/navigation";
 import html2canvas from "html2canvas";
 
 export default function useOsCompleta() {
   const { SearchByIdContent } = useSearchByIdContext();
-  const router = useRouter();
-
-  if (SearchByIdContent[0] == undefined) {
-    router.push('/');
-  }
 
   function captureScreenshot(elementId: string) {
     const content = document.getElementById(elementId);
@@ -37,6 +31,6 @@ export default function useOsCompleta() {
     if (workedTime) workedTime += ' e ';
     workedTime += `${minutes} minuto${minutes > 1 ? 's' : ''}`;
   }
-  
+
   return { captureScreenshot, SearchByIdContent, dateAndHourFormated, workedTime };
 }

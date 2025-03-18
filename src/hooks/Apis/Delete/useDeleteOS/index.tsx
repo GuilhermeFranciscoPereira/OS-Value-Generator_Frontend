@@ -1,7 +1,7 @@
 import { useToastContext } from '@/contexts/ToastContext';
 import { useMutation } from '@tanstack/react-query';
-import useGetAllOS from '../../Get/useGetAllOS';
 import axios from 'axios';
+import useGetAllOS from '../../Get/useGetAllOS';
 
 async function deleteOS(id: number) {
     const response = await axios.delete(`http://localhost:7777/allOS/DELETE/${id}`);

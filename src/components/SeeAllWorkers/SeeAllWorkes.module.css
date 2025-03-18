@@ -53,5 +53,5 @@
 }
 
 .SeeAllWorkersSection > .tableSeeAllWorkers > tbody > tr:nth-child(even) {
-    background-color: #c9eeda;
+    background-color: var(--Green-Third);
 }

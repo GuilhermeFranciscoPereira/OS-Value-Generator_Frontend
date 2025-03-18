@@ -16,6 +16,12 @@ export default function useGetByClientName() {
   const inputRef = useRef<string>('');
   const { showToast } = useToastContext();
 
+  if (inputRef.current.length === 0) {
+    setTimeout(() => {
+      toSetFiltersHowActive(false);
+    }, 300);
+  }
+
   function handleClientNameChange(e: React.ChangeEvent<HTMLInputElement>): void {
     inputRef.current = e.target.value;
     setClientName(e.target.value);

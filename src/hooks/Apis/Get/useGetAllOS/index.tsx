@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import useGetAllPerPage from '../useGetAllPerPage';
 
 type DataResponseProps = {
     id: number;
@@ -8,6 +9,8 @@ type DataResponseProps = {
 };
 
 export default function useGetAllOS() {
+    const { refetchTheGetPerPage } = useGetAllPerPage();
+
     const { data, isFetching, refetch } = useQuery<Array<DataResponseProps>>({
         queryKey: ['fetchAllOS'],
         queryFn: async () => {
@@ -18,6 +21,7 @@ export default function useGetAllOS() {
 
     function refetchTheGetAllOS() {
         refetch();
+        refetchTheGetPerPage();
     };
 
     return { data, isFetching, refetchTheGetAllOS };

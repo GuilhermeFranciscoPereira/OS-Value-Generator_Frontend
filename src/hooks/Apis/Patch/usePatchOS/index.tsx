@@ -1,12 +1,12 @@
 import * as z from 'zod';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import useGetAllOS from '../../Get/useGetAllOS';
 import { useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToastContext } from '@/contexts/ToastContext';
 import { useModalContext } from '@/contexts/ModalContext';
 import { useSearchByIdContext } from '@/contexts/SearchByIdContext';
-import useGetAllOS from '../../Get/useGetAllOS';
 
 type FormDataProps = {
   employees: Array<string>;
@@ -107,7 +107,7 @@ export default function usePatchOS() {
 
     const formData: DatasToPatchInBackEndProps = {
       employees: data.employees.join(", "),
-      clientName: (data.clientName).toUpperCase(),
+      clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase()),
       fullOsValue: fullOsValue,
       degreeOfRisk: data.degreeOfRisk,
       materialsValue: data.materialsValue,
