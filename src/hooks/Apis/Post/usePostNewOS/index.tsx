@@ -28,7 +28,7 @@ type DatasToPostInBackEndProps = {
 };
 
 const schema = z.object({
-  employees: z.array(z.string()).min(1, 'Selecione pelo menos um trabalhador'),
+  employees: z.array(z.string()).min(1, 'Selecione pelo menos um funcionário'),
   clientName: z.string().min(1, 'Nome do cliente é obrigatório!'),
   fullKM: z.union([z.number().min(1, 'KM total deve ser pelo menos 1'), z.string()]),
   workedTime: z.union([z.number().min(1, 'Tempo trabalhado deve ser pelo menos 1 minuto'), z.string()]),
@@ -59,12 +59,60 @@ export default function usePostOS() {
     defaultValues: {
       employees: [],
       clientName: '',
-      fullKM: 0,
-      workedTime: 0,
-      degreeOfRisk: 0,
-      materialsValue: 0,
+      fullKM: '',
+      workedTime: '',
+      degreeOfRisk: '',
+      materialsValue: '',
     },
   });
+
+  const customStylesToTheMultiForm = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: 'transparent',
+      border: '1px solid #5c34f4',
+      '&:hover': {
+        borderColor: '#5c34f4',
+      },
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      border: '1px solid #5c34f4',
+      backgroundColor: '#fff',
+    }),
+    option: (provided: any, state: { isSelected: any; isFocused: any; }) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? 'transparent' : state.isFocused ? '#5c34f4' : '#ddd',
+      color: state.isSelected || state.isFocused ? 'white' : '#333',
+      borderColor: '#5c34f4',
+      fontSize: state.isSelected ? '18px' : '18px',
+      fontWeight: state.isSelected ? 'bold' : '500',
+      '&:hover': {
+        backgroundColor: '#5c34f4',
+        color: 'white',
+      },
+    }),
+    placeholder: (provided: any) => ({
+      ...provided,
+      color: '#aaa',
+    }),
+    multiValueRemove: (provided: any) => ({
+      ...provided,
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: '#e74c3c',
+        color: 'white',
+      },
+    }),
+    clearIndicator: (provided: any) => ({
+      ...provided,
+      cursor: 'pointer',
+      color: '#e74c3c',
+      '&:hover': {
+        color: '#e74c3c',
+      },
+    }),
+  };
 
   const postNewOS = async (formData: DatasToPostInBackEndProps) => {
     const api = axios.create({
@@ -107,15 +155,15 @@ export default function usePostOS() {
       employees: data.employees.join(", "),
       clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase()),
       fullOsValue: fullOsValue,
-      degreeOfRisk: data.degreeOfRisk,
-      materialsValue: data.materialsValue,
-      fullKM: data.fullKM,
-      workedTime: data.workedTime,
+      degreeOfRisk: Number(data.degreeOfRisk),
+      materialsValue: Number(data.materialsValue),
+      fullKM: Number(data.fullKM),
+      workedTime: Number(data.workedTime),
       employeesValue: employeesValue
     };
 
     mutation.mutate(formData);
   }
 
-  return { control, handleSubmit, submitForm, options, errors, mutation };
+  return { control, customStylesToTheMultiForm, handleSubmit, submitForm, options, errors, mutation };
 }

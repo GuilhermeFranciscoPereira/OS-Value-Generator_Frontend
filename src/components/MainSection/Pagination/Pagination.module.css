@@ -10,7 +10,7 @@
     padding: 10px;
     margin: 0 5px;
     cursor: pointer;
-    background-color: var(--Green-Secondary);
+    background-color: var(--Purple-Secondary);
     color: white;
     border: none;
     border-radius: 12px;
@@ -23,7 +23,7 @@
 }
 
 .paginationButton:hover {
-    background-color: var(--Green-Primary);
+    background-color: var(--Purple-Primary);
 }
 
 .paginationText {

@@ -29,7 +29,7 @@ type DatasToPatchInBackEndProps = {
 };
 
 const schema = z.object({
-  employees: z.array(z.string()).min(1, 'Selecione pelo menos um trabalhador'),
+  employees: z.array(z.string()).min(1, 'Selecione pelo menos um funcionário'),
   clientName: z.string().min(1, 'Nome do cliente é obrigatório!'),
   fullKM: z.union([z.number().min(1, 'KM total deve ser pelo menos 1'), z.string()]),
   workedTime: z.union([z.number().min(1, 'Tempo trabalhado deve ser pelo menos 1 minuto'), z.string()]),
@@ -55,6 +55,56 @@ export default function usePatchOS() {
     { value: 'Patric', label: 'Patric' },
     { value: 'Wesley', label: 'Wesley' },
   ];
+
+  const customStylesToTheMultiForm = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: 'transparent',
+      border: '1px solid #5c34f4',
+      '&:hover': {
+        borderColor: '#5c34f4',
+      },
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      border: '1px solid #5c34f4',
+      backgroundColor: '#fff',
+    }),
+    option: (provided: any, state: { isSelected: any; isFocused: any; }) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? 'transparent' : state.isFocused ? '#5c34f4' : '#ddd',
+      color: state.isSelected || state.isFocused ? 'white' : '#333',
+      borderColor: '#5c34f4',
+      fontSize: state.isSelected ? '16px' : '14px',
+      fontWeight: state.isSelected ? 'bold' : 'normal',
+      '&:hover': {
+        backgroundColor: '#5c34f4',
+        color: 'white',
+      },
+    }),
+    placeholder: (provided: any) => ({
+      ...provided,
+      color: '#aaa',
+    }),
+    multiValueRemove: (provided: any) => ({
+      ...provided,
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: '#e74c3c',
+        color: 'white',
+      },
+    }),
+    clearIndicator: (provided: any) => ({
+      ...provided,
+      cursor: 'pointer',
+      color: '#5c34f4',
+      '&:hover': {
+        color: '#e74c3c',
+      },
+    }),
+  };
+
+
 
   const { control, handleSubmit, formState: { errors } } = useForm<FormDataProps>({
     resolver: zodResolver(schema),
@@ -119,5 +169,5 @@ export default function usePatchOS() {
     mutation.mutate(formData);
   }
 
-  return { control, handleSubmit, submitForm, options, errors, mutation };
+  return { control, customStylesToTheMultiForm, handleSubmit, submitForm, options, errors, mutation };
 }

@@ -5,7 +5,7 @@ button.buttonToCaptureTheScreen {
     font-size: 16px;
     cursor: pointer;
     padding: 15px;
-    background-color: var(--Green-Secondary);
+    background-color: var(--Purple-Secondary);
     color: white;
     border: none;
     border-radius: 8px;
@@ -16,7 +16,7 @@ button.buttonToCaptureTheScreen {
 }
 
 button.buttonToCaptureTheScreen:hover {
-    background-color: var(--Green-Primary);
+    background-color: var(--Purple-Primary);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     transform: translateY(-5px);
 }
@@ -28,9 +28,8 @@ button.buttonToCaptureTheScreen:active {
 
 button.buttonToCaptureTheScreen:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(38, 188, 106, 0.3);
+    box-shadow: 0 0 0 3px var(--Purple-Secondary);
 }
-
 
 .main > .header {
     display: flex;

@@ -6,14 +6,14 @@ import styles from '@/components/Form/Form.module.css';
 import usePatchOS from '@/hooks/Apis/Patch/usePatchOS';
 
 export default function UpdateOS(): React.ReactNode {
-    const { control, handleSubmit, submitForm, options, errors } = usePatchOS();
+    const { control, customStylesToTheMultiForm, handleSubmit, submitForm, options, errors } = usePatchOS();
 
     return (
         <form onSubmit={handleSubmit(submitForm)} className={styles.formContainer} encType="multipart/form-data">
             <h2>Editar ordem de serviço</h2>
 
             <div className={styles.formGroup}>
-                <label htmlFor="employees">Trabalhador(es)</label>
+                <label htmlFor="employees">Funcionários</label>
                 <Controller
                     name="employees"
                     control={control}
@@ -30,6 +30,8 @@ export default function UpdateOS(): React.ReactNode {
                                 value: emp,
                                 label: emp
                             }))}
+                            styles={customStylesToTheMultiForm}
+                            placeholder='Selecione..'
                         />
                     )}
                 />

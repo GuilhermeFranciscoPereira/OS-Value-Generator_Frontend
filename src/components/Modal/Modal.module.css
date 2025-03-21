@@ -20,10 +20,10 @@
     max-height: 95vh;
     width: 90%;
     overflow-y: auto;
-    background-color: white;
-    border: 2px solid black;
+    background-color: #06040b;
+    color: white;
     border-radius: 30px;
-    box-shadow: 2px 2px 10px white;
+    box-shadow: 2px 2px 5px var(--Purple-Primary);
 }
 
 .modalSection > .modalDiv > .modalClose {
@@ -31,19 +31,17 @@
     cursor: pointer;
     right: -35%;
     font-size: 18px;
-    padding: 5px;
-    margin-bottom: 20px;
-    color: red;
-    border: 2px solid red;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white;
+    background-color: rgba(255, 0, 0, .1);
+    border: 2px solid rgba(255, 0, 0, .5);
     border-radius: 30px;
-    box-shadow: 5px 5px 7px red;
-    transition: .3s ease;
+    transition: .2s ease-in-out;
 }
 
 .modalSection > .modalDiv > .modalClose:hover {
-    color: white;
-    background-color: rgba(255, 0, 0, 0.3);
-    box-shadow: 3px 3px 7px var(--Red-primary-color);
+    transform: scale(1.05);
 }
 
 /* Scroll-Bar Style */

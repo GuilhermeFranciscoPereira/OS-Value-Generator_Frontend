@@ -16,29 +16,31 @@
 .aside > .headline > .headlineTexts > h1 {
     font-size: 1.3rem;
     font-weight: 600;
+    color: var(--Purple-Secondary);
 }
 
 .aside > .headline > .headlineTexts > p {
-    color: var(--Grey-Primary);
+    color: #aaa;
     font-size: 1rem;
-}
-
-.aside > .headline > .headlineImage > img {
-    border-radius: 100%;
-    border: 1px solid var(--Grey-Primary);
 }
 
 .aside > .options {
     margin-top: 30px;
 }
 
-.aside > .options > ul > li {
+
+.aside > .options > ul > li, .aside > .options > ul > a > li {
     display: flex;
     align-items: center;
     padding: 20px;
     margin: 0px 10px 10px 0px;
     font-size: 1.3rem;
+    color: white;
     cursor: pointer;
+}
+
+.aside > .options > ul > a {
+    text-decoration: none;
 }
 
 .aside > .options > ul > li:nth-child(1) {
@@ -46,17 +48,22 @@
     cursor: default;
 }
 
-.aside > .options > ul > li:nth-child(1):hover {
-    background-color: white;
-    color: black;
-}
-
-.aside > .options > ul > li:hover {
-    background-color: var(--Green-Primary);
+.aside > .options > ul > li:nth-child(1) > div.inputContainer > input {
+    background-color: transparent;
     color: white;
 }
 
-.aside > .options > ul > li > svg {
+.aside > .options > ul > li:nth-child(1):hover {
+    background-color: transparent;
+    color: var(--Purple-Secondary);
+}
+
+.aside > .options > ul > li:hover, .aside > .options > ul > a > li:hover {
+    background-color: var(--Purple-Primary);
+    color: white;
+}
+
+.aside > .options > ul > li > svg, .aside > .options > ul > a > li > svg {
     margin-right: 20px;
 }
 
@@ -83,7 +90,7 @@
 }
 
 .inputContainer:hover, .inputContainer:focus {
-    border: 2px solid var(--Green-Primary);
+    border: 2px solid var(--Purple-Primary);
 }
 
 .inputContainer:hover > svg, .inputContainer:focus > svg {

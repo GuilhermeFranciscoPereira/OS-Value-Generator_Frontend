@@ -3,10 +3,10 @@
 
 
 :root {
-    --Grey-Primary: #9c9d9d;
-    --Green-Primary: #26bc6a;
-    --Green-Secondary: #8ddab0;
-    --Green-Third: #c9eeda;
+    --Grey-Primary: #1f2937;
+    --Purple-Primary: #3c2197;
+    --Purple-Secondary: #5c34f4;
+    --Purple-Third: #9479ff9d;
 }
 
 * { 
@@ -19,6 +19,8 @@
 html, body {
     width: 100vw;
     overflow-x: hidden;
+    background-color: #06040b;
+    color: #fcfcfd;
 }
 
 .content {

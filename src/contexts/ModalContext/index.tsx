@@ -4,7 +4,7 @@ type ModalContextProps = {
     isModalOpen: boolean;
     modalContent: ReactNode;
     toSetModalContent: (content: ReactNode) => void;
-    toggleModalState: () => void;
+    toggleModalState: (modalState?: boolean) => void;
 }
 
 const ModalContext = createContext<ModalContextProps>({} as ModalContextProps);
@@ -13,8 +13,8 @@ const ModalProvider = ({children}: {children: React.ReactNode}): React.ReactNode
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<ReactNode>();
 
-    function toggleModalState() {
-        setIsModalOpen(!isModalOpen);
+    function toggleModalState(modalState?: boolean) {
+        setIsModalOpen(modalState ? modalState : !isModalOpen);
     }
 
     function toSetModalContent(content: React.ReactNode) {

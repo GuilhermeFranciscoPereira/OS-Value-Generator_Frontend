@@ -38,13 +38,17 @@
     transition: .4s ease-in-out;
 }
 
+.table > tbody > tr > td:nth-child(4) > ul > li > svg {
+    color: greenyellow;
+}
+
 .table > tbody > tr > td:nth-child(4) > ul > li:hover {
     transform: scale(1.1);
 }
 
 .table > thead > tr > th {
-    background-color: var(--Green-Secondary);
-    font-weight: 400;
+    background-color: var(--Purple-Secondary);
+    font-weight: 600;
 }
 
 .table > thead > tr > th:nth-child(1) {
@@ -56,7 +60,7 @@
 }
 
 .table > tbody > tr:nth-child(even) {
-    background-color: var(--Green-Third);
+    background-color: var(--Purple-Third);
 }
 
 @media screen and (max-width: 768px) {

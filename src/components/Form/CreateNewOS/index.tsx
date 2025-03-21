@@ -6,14 +6,14 @@ import styles from '@/components/Form/Form.module.css';
 import usePostNewOS from '@/hooks/Apis/Post/usePostNewOS';
 
 export default function CreateNewOS(): React.ReactNode {
-  const { control, handleSubmit, submitForm, options, errors } = usePostNewOS();
+  const { control, customStylesToTheMultiForm, handleSubmit, submitForm, options, errors } = usePostNewOS();
 
   return (
     <form onSubmit={handleSubmit(submitForm)} className={styles.formContainer} encType="multipart/form-data">
       <h2>Criar nova ordem de serviço</h2>
 
       <div className={styles.formGroup}>
-        <label htmlFor="employees">Trabalhador(es)</label>
+        <label htmlFor="employees">Funcionários</label>
         <Controller
           name="employees"
           control={control}
@@ -30,6 +30,8 @@ export default function CreateNewOS(): React.ReactNode {
                 value: emp,
                 label: emp
               }))}
+              styles={customStylesToTheMultiForm}
+              placeholder='Selecione..'
             />
           )}
         />

@@ -40,7 +40,7 @@
 }
 
 .SeeAllWorkersSection > .tableSeeAllWorkers > thead > tr > th {
-    background-color: #8ddab0;
+    background-color: var(--Purple-Primary);
     font-weight: 400;
 }
 
@@ -52,6 +52,10 @@
     border-radius: 0px 20px 0px 0px;
 }
 
+.SeeAllWorkersSection > .tableSeeAllWorkers > tbody > tr:nth-child(odd) {
+    background-color: var(--Purple-Third);
+}
+
 .SeeAllWorkersSection > .tableSeeAllWorkers > tbody > tr:nth-child(even) {
-    background-color: var(--Green-Third);
+    background-color: #543abe;
 }

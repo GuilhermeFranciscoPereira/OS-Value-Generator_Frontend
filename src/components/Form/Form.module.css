@@ -14,7 +14,7 @@
     text-align: center;
     letter-spacing: 1px;
     padding-bottom: 10px;
-    border-bottom: 3px solid var(--Green-Primary);
+    border-bottom: 3px solid var(--Purple-Primary);
 }
 
 .formGroup {
@@ -35,25 +35,18 @@
     padding: 12px;
     font-size: 16px;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-.formGroup > select:focus, .formGroup > input:focus {
+    text-transform: capitalize;
+    background-color: transparent;
     outline: none;
-    border-color: var(--Green-Secondary);
-}
-
-.formGroup > select {
-    height: 40px;
-    cursor: pointer;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    border-color: var(--Purple-Secondary);
 }
 
 .formGroup > .error {
     color: red;
-    font-size: 14px;
+    font-size: 20px;
     margin-top: 5px;
 }
 
@@ -65,13 +58,13 @@
     border-radius: 8px;
     cursor: pointer;
     transition: .3s ease;
-    background-color: var(--Green-Primary);
+    background-color: var(--Purple-Secondary);
     transition: .4 ease-in-out;
 }
 
 .submitBtn:hover {
-    transform: scale(1.1);
-    border-radius: 12px;
+    transform: scale(1.05);
+    background-color: var(--Purple-Primary);
 }
 
 @media (max-width: 480px) {

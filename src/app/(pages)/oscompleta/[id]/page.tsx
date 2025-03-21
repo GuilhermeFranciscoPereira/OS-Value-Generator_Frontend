@@ -62,7 +62,7 @@ export default function oscompleta(): React.ReactNode {
                         <span className={styles.value}>{(SearchByIdContent[0].fullKM * 1.07).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                     </div>
                     <div className={styles.trabalhadores}>
-                        <span className={styles.label}>Trabalhadores</span>
+                        <span className={styles.label}>Funcionários</span>
                         <span className={styles.value}>{SearchByIdContent[0].employees}</span>
                     </div>
                     <div className={styles.tempoTrabalhado}>
