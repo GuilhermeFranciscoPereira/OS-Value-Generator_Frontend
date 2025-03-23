@@ -17,7 +17,7 @@ export default function Sidebar(): React.ReactNode {
                     <p>Protelt Sistemas de Segurança</p>
                 </div>
                 <div className={styles.headlineImage}>
-                    <Image src={ProteltLogo} alt='Logo da protelt' height={70} width={70} />
+                    <Image src={ProteltLogo} alt='Logo da protelt' height={80} width={80} />
                 </div>
             </div>
 

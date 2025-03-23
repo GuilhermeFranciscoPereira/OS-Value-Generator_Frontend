@@ -5,6 +5,7 @@ import useDeleteOS from '@/hooks/Apis/Delete/useDeleteOS';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 import useGetAllPerPage from '@/hooks/Apis/Get/useGetAllPerPage';
 import styles from '@/components/MainSection/MainSection.module.css';
+import mockDatas from '@/services/mockDatas';
 
 type ArrayWithDatasProps = {
     id: number;
@@ -17,44 +18,7 @@ export default function MainSection(): React.ReactNode {
     const { fetchDataById } = useGetById();
     const { deleteOS } = useDeleteOS();
     let { data, page, toSetPage } = useGetAllPerPage();
-    data = [
-        {
-            "id": 1,
-            "employees": "Kaique, Matheus",
-            "clientName": "Terras 2",
-            "fullOsValue": 23,
-        },
-        {
-            "id": 2,
-            "employees": "Kauã, Adilson",
-            "clientName": "Plaza Athenee",
-            "fullOsValue": 3,
-        },
-        {
-            "id": 3,
-            "employees": "Adilson, Kaique",
-            "clientName": "Plaza Athenee",
-            "fullOsValue": 3500,
-        },
-        {
-            "id": 4,
-            "employees": "Kaique, Matheus",
-            "clientName": "Terras 2",
-            "fullOsValue": 23,
-        },
-        {
-            "id": 5,
-            "employees": "Kauã, Adilson",
-            "clientName": "Plaza Athenee",
-            "fullOsValue": 3,
-        },
-        {
-            "id": 6,
-            "employees": "Adilson, Kaique",
-            "clientName": "Plaza Athenee",
-            "fullOsValue": 3500,
-        }
-    ]
+    data?.length === 0 ? data : data = mockDatas.slice(0, 6);
     const { FiltersHowActive, FiltersContent } = useFiltersContext();
     let ArrayWithDatas: Array<ArrayWithDatasProps> = data ? data : [];
     FiltersHowActive ? ArrayWithDatas = FiltersContent : data;

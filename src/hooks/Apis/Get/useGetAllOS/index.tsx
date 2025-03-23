@@ -6,6 +6,11 @@ type DataResponseProps = {
     employees: string;
     clientName: string;
     fullOsValue: number;
+    degreeOfRisk: number;
+    materialsValue: number;
+    fullKM: number;
+    employeesValue: number;
+    dateAndHourOfCreationOS: string
 };
 
 export default function useGetAllOS() {

@@ -2,10 +2,12 @@
 import styles from '@/components/Header/Header.module.css';
 import useGetAllOS from '@/hooks/Apis/Get/useGetAllOS';
 import useHeader from '@/hooks/useHeader';
+import mockDatas from '@/services/mockDatas';
 import { useEffect } from 'react';
 
 export default function Header(): React.ReactNode {
-    const { data } = useGetAllOS();
+    let { data } = useGetAllOS();
+    !data || data.length === 0 ? data = mockDatas.slice(0, 6) : data;
     const { getMainClient, getTopEmployee, getTotalfullOsValue, mainClientCount, topEmployee, topEmployeeCount, totalfullOsValue, averagefullOsValue, mainClient } = useHeader();
 
     useEffect(() => {
