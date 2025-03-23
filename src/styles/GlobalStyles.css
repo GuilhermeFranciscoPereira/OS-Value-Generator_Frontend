@@ -33,6 +33,11 @@ html, body {
     margin-left: 25vw;
 }
 
+/* Scroll-Bar Style */
+::-webkit-scrollbar {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     .content {
         display: flex;

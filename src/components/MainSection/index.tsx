@@ -15,13 +15,15 @@ type ArrayWithDatasProps = {
 };
 
 export default function MainSection(): React.ReactNode {
-    const { fetchDataById } = useGetById();
+    let { data } = useGetAllPerPage();
     const { deleteOS } = useDeleteOS();
-    let { data, page, toSetPage } = useGetAllPerPage();
-    data?.length === 0 ? data : data = mockDatas.slice(0, 6);
+    const { fetchDataById } = useGetById();
+    const { page, toSetPage } = useGetAllPerPage();
     const { FiltersHowActive, FiltersContent } = useFiltersContext();
+    
     let ArrayWithDatas: Array<ArrayWithDatasProps> = data ? data : [];
-    FiltersHowActive ? ArrayWithDatas = FiltersContent : data;
+    if (FiltersHowActive) { ArrayWithDatas = FiltersContent }
+    if (!data || data.length === 0) { data = mockDatas.slice(0, 6) }
 
     return (
         <main className={styles.mainSection}>

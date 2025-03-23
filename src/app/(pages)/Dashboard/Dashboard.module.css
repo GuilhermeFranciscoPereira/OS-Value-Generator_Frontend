@@ -133,7 +133,12 @@
   width: 100%;
 }
 
-.dashboardContainer > .mainPanel > .mainGraphs > div > .mainChart {
+.dashboardContainer > .mainPanel > .mainGraphs > .topMainGraphs > .topMainGraphsDivs {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardContainer > .mainPanel > .mainGraphs > div > .mainChart, .dashboardContainer > .mainPanel > .mainGraphs > div.topMainGraphs > div.topMainGraphsDivs > .mainChart {
   background: var(--Grey-Primary);
   border: 1px solid var(--Grey-Primary);
   padding: 10px;

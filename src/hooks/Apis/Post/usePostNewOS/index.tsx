@@ -67,7 +67,7 @@ export default function usePostOS() {
   });
 
   const customStylesToTheMultiForm = {
-    control: (provided: any, state: any) => ({
+    control: (provided: any ) => ({
       ...provided,
       backgroundColor: 'transparent',
       border: '1px solid #5c34f4',

@@ -5,7 +5,7 @@ import { Sector } from "recharts";
 
 export default function useDashboard() {
   let { data } = useGetAllOS();
-  !data || data.length === 0 ? data = mockDatas : data;
+  if (!data || data.length === 0) { data = mockDatas }
 
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
@@ -132,7 +132,7 @@ export default function useDashboard() {
     return Object.values(last7Days);
   }, [filteredData]);
 
-  const processData = (data: { clientName: string; employeesValue: number; materialsValue: number; fullOsValue: number; fullKM: number }[]): { name: string; employees: number; materials: number; fullKM: number; others: number; totalValueOS: number }[] => {
+  const processData = (): { name: string; employees: number; materials: number; fullKM: number; others: number; totalValueOS: number }[] => {
     const groupedData: Record<string, {
       name: string;
       employees: number;
@@ -211,15 +211,11 @@ export default function useDashboard() {
 
   const onPieEnter = (_: any, index: number) => setActiveIndex(index);
 
-  const formatDate = (date: string | number | Date) => {
-    return new Date(date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-  };
-
   const processedDataIn14Days = useMemo(() => {
     const today = new Date();
     const last14Days = new Array(14).fill(0).map((_, i) => {
       const date = new Date();
-      date.setDate(today.getDate() - ( 13 - i));
+      date.setDate(today.getDate() - (13 - i));
 
       const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`;
 

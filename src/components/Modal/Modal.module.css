@@ -43,8 +43,3 @@
 .modalSection > .modalDiv > .modalClose:hover {
     transform: scale(1.05);
 }
-
-/* Scroll-Bar Style */
-::-webkit-scrollbar {
-    display: none;
-}

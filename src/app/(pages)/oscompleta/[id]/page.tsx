@@ -3,10 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import proteltLogo from '@/assets/proteltlogo.png';
 import useOsCompleta from '@/hooks/Pages/useOsCompleta';
-import styles from '@/app/(pages)/oscompleta/[id]/oscompleta.module.css';
 import { useFiltersContext } from "@/contexts/FiltersContext";
+import styles from '@/app/(pages)/OsCompleta/[id]/OsCompleta.module.css';
 
-export default function oscompleta(): React.ReactNode {
+export default function OsCompleta(): React.ReactNode {
     const { captureScreenshot, SearchByIdContent, dateAndHourFormated, workedTime } = useOsCompleta();
     const { toSetFiltersHowActive } = useFiltersContext();
 

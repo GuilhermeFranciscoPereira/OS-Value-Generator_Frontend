@@ -34,7 +34,7 @@ export default function useGetById(): { fetchDataById: (id: number, callerType?:
         toSetModalContent(<UpdateOS></UpdateOS>);
         toggleModalState();
       } else {
-        router.push(`/oscompleta/${id}`);
+        router.push(`/OsCompleta/${id}`);
       }
     } catch (error: any) {
       showToast({ message: `Não foi possível mostrar a OS completa. Erro: ${error.message}`, backgroundColor: "#d83734" });
