@@ -1,12 +1,12 @@
 .dashboardContainer {
   display: flex;
-  height: 100vh;
+  max-height: 100vh;
   background-color: #06040b;
   color: #fcfcfd;
 }
 
 .dashboardContainer > .sidebar {
-  width: 25vw;
+  width: 20vw;
   background-color: var(--Grey-Primary);
   padding: 1rem;
   display: flex;
@@ -143,4 +143,5 @@
   border: 1px solid var(--Grey-Primary);
   padding: 10px;
   border-radius: 8px;
+  height: 33vh;
 }

@@ -1,11 +1,12 @@
 import { useState, useMemo } from "react";
 import useGetAllOS from "@/hooks/Apis/Get/useGetAllOS";
-import mockDatas from "@/services/mockDatas";
 import { Sector } from "recharts";
+import mockDatas from "@/services/mockDatas";
 
 export default function useDashboard() {
-  let { data } = useGetAllOS();
-  if (!data || data.length === 0) { data = mockDatas }
+  // const { data } = useGetAllOS();
+  // if (!data)  { return false };
+  const data = mockDatas;
 
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const [selectedClient, setSelectedClient] = useState<string | null>(null);

@@ -5,7 +5,6 @@ import useDeleteOS from '@/hooks/Apis/Delete/useDeleteOS';
 import { useFiltersContext } from '@/contexts/FiltersContext';
 import useGetAllPerPage from '@/hooks/Apis/Get/useGetAllPerPage';
 import styles from '@/components/MainSection/MainSection.module.css';
-import mockDatas from '@/services/mockDatas';
 
 type ArrayWithDatasProps = {
     id: number;
@@ -15,15 +14,13 @@ type ArrayWithDatasProps = {
 };
 
 export default function MainSection(): React.ReactNode {
-    let { data } = useGetAllPerPage();
     const { deleteOS } = useDeleteOS();
     const { fetchDataById } = useGetById();
-    const { page, toSetPage } = useGetAllPerPage();
+    const { data, page, toSetPage } = useGetAllPerPage();
     const { FiltersHowActive, FiltersContent } = useFiltersContext();
     
     let ArrayWithDatas: Array<ArrayWithDatasProps> = data ? data : [];
     if (FiltersHowActive) { ArrayWithDatas = FiltersContent }
-    if (!data || data.length === 0) { data = mockDatas.slice(0, 6) }
 
     return (
         <main className={styles.mainSection}>
