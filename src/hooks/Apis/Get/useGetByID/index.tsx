@@ -10,6 +10,9 @@ type DataResponseProps = {
   employees: string;
   clientName: string;
   fullOsValue: number;
+  toll: number;
+  feeding: number;
+  accommodation: number;
   degreeOfRisk: number;
   materialsValue: number;
   fullKM: number;
@@ -34,7 +37,7 @@ export default function useGetById(): { fetchDataById: (id: number, callerType?:
         toSetModalContent(<UpdateOS></UpdateOS>);
         toggleModalState();
       } else {
-        router.push(`/OsCompleta/${id}`);
+        router.push(`/oscompleta/${id}`);
       }
     } catch (error: any) {
       showToast({ message: `Não foi possível mostrar a OS completa. Erro: ${error.message}`, backgroundColor: "#d83734" });

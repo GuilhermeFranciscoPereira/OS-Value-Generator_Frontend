@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import ProteltLogo from '@/assets/proteltlogo-Purple.png';
-import useSidebar from '@/hooks/useSidebar';
+import useSidebar from '@/hooks/Components/useSidebar';
 import styles from '@/components/Sidebar/Sidebar.module.css';
 import useGetByClientName from '@/hooks/Apis/Get/useGetByClientName';
 
@@ -18,7 +18,7 @@ export default function Sidebar(): React.ReactNode {
                     <p>Protelt Sistemas de Segurança</p>
                 </div>
                 <div className={styles.headlineImage}>
-                    <Image src={ProteltLogo} alt='Logo da protelt' height={80} width={80} />
+                    <Image src={ProteltLogo} alt='Logo da protelt' height={65} width={65} />
                 </div>
             </div>
 

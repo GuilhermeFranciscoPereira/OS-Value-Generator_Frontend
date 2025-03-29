@@ -86,7 +86,10 @@ button.buttonToCaptureTheScreen:focus {
     'valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS valorTotalDaOS dataHoraDaCriacaoOS'
     'comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado comoOValoreGerado'
     'transporte transporte transporte transporte transporte transporteKMTotal transporteValorFinal'
-    'trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores tempoTrabalhado valorTrabalhadores'
+    'trabalhadores trabalhadores trabalhadores trabalhadores trabalhadores valorTrabalhadores valorTrabalhadores'
+    'pedagio pedagio pedagio pedagio pedagio pedagio pedagioValor'
+    'alimentacao alimentacao alimentacao alimentacao alimentacao alimentacao alimentacaoValor'
+    'hospedagem hospedagem hospedagem hospedagem hospedagem hospedagem hospedagemValor'
     'materiais materiais materiais materiais materiais materiais materiais'
     'imposto imposto imposto imposto imposto imposto imposto'
     'grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRisco grauDeRiscoValor'
@@ -102,6 +105,12 @@ button.buttonToCaptureTheScreen:focus {
 .comoOValoreGerado {grid-area: comoOValoreGerado;}
 .trabalhadores {grid-area: trabalhadores;}
 .imposto {grid-area: imposto;}
+.pedagio {grid-area: pedagio;}
+.pedagioValor  {grid-area: pedagioValor;}
+.alimentacao {grid-area: alimentacao;}
+.alimentacaoValor  {grid-area: alimentacaoValor;}
+.hospedagem {grid-area: hospedagem;}
+.hospedagemValor  {grid-area: hospedagemValor;}
 .transporte {grid-area: transporte;}
 .materiais {grid-area: materiais;}
 .grauDeRisco {grid-area: grauDeRisco;}

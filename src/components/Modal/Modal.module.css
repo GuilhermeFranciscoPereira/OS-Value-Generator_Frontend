@@ -23,7 +23,8 @@
     background-color: #06040b;
     color: white;
     border-radius: 30px;
-    box-shadow: 2px 2px 5px var(--Purple-Primary);
+    border: 1px solid var(--Purple-Primary);
+    box-shadow: 2px 2px 5px var(--Purple-Secondary);
 }
 
 .modalSection > .modalDiv > .modalClose {

@@ -1,7 +1,7 @@
 'use client';
 import styles from '@/components/Header/Header.module.css';
 import useGetAllOS from '@/hooks/Apis/Get/useGetAllOS';
-import useHeader from '@/hooks/useHeader';
+import useHeader from '@/hooks/Components/useHeader';
 import { useEffect } from 'react';
 
 export default function Header(): React.ReactNode {

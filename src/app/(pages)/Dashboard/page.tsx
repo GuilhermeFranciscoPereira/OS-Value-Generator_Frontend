@@ -7,7 +7,7 @@ import { PieChart, Pie, Cell, XAxis, YAxis, Tooltip, LineChart, Line, Responsive
 
 export default function Dashboard() {
     const [isClient, setIsClient] = useState(false);
-    const { setSelectedEmployee, selectedEmployee, employees, setSelectedClient, selectedClient, clients, data, mostFrequentRisk, radarData, riskCount, activeIndex, renderActiveShape, pieData, onPieEnter, totalKM, processedDataIn7Days, colors, TriangleBar, processData, processedDataIn14Days, topClients, clientOccurrences } = useDashboard();
+    const { setSelectedEmployee, selectedEmployee, employees, setSelectedClient, selectedClient, clients, data, mostFrequentRisk, radarData, riskCount, activeIndex, renderActiveShape, pieData, onPieEnter, processedDataIn7Days, colors, TriangleBar, processData, processedDataIn14Days, topClients, clientOccurrences } = useDashboard();
     useEffect(() => {
         setIsClient(true);
     }, []);
@@ -60,12 +60,12 @@ export default function Dashboard() {
 
                             <div className={styles.statCard}>
                                 <h3>Risco mais frequente nas OS: {mostFrequentRisk.risk} - Presente em: {mostFrequentRisk.count} OS</h3>
-                                <ResponsiveContainer width="100%" height={300}>
+                                <ResponsiveContainer width="100%" height={250}>
                                     <RadarChart cx="50%" cy="50%" outerRadius="80%" data={radarData}>
                                         <PolarGrid />
                                         <PolarAngleAxis dataKey="risk" />
                                         <PolarRadiusAxis
-                                            angle={30}
+                                            angle={90}
                                             domain={[0, Math.max(...Object.values(riskCount)) || 1]}
                                             tickCount={5}
                                             allowDecimals={false}
@@ -98,8 +98,8 @@ export default function Dashboard() {
                             </div>
 
                             <div className={styles.statCard}>
-                                <h3>KMs rodados nos últimos 7 dias: {totalKM}KM</h3>
-                                <BarChart width={500} height={250} data={processedDataIn7Days} margin={{ top: 20, right: 50, left: 20, bottom: 5 }}>
+                            <h3>KMs rodados nos últimos 7 dias: {processedDataIn7Days?.reduce((inicialValue, kmTotal) => { return inicialValue + kmTotal.fullKM }, 0)}KM</h3>
+                                <BarChart width={400} height={250} data={processedDataIn7Days} margin={{ top: 20, right: 50, left: 20, bottom: 5 }}>
                                     <CartesianGrid strokeDasharray="1 1" />
                                     <XAxis dataKey="date" />
                                     <YAxis />
@@ -118,7 +118,7 @@ export default function Dashboard() {
                             <div className={styles.topMainGraphs}>
                                 <div className={styles.topMainGraphsDivs}>
                                     <h2>De onde veio o valor da OS?</h2>
-                                    <ResponsiveContainer width={450} height={300} className={styles.mainChart}>
+                                    <ResponsiveContainer width={500} height={350} className={styles.mainChart}>
                                         <AreaChart
                                             width={500}
                                             height={300}
@@ -133,9 +133,13 @@ export default function Dashboard() {
                                                     value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                                                 }
                                             />
+                                            <Area type="monotone" name="Cliente" dataKey="name" stackId="1" stroke="#3c2197" fill="#3c2197" />
                                             <Area type="monotone" name="Hora dos funcionários" dataKey="employees" stackId="1" stroke="#d016d6" fill="#d016d6" />
-                                            <Area type="monotone" name="Materiais" dataKey="materials" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
-                                            <Area type="monotone" name="Transporte" dataKey="fullKM" stackId="1" stroke="#ff0000" fill="#ff0000" />
+                                            <Area type="monotone" name="Transporte" dataKey="fullKM" stackId="1" stroke="#FF5733" fill="#FF5733" />
+                                            <Area type="monotone" name="Pedágio" dataKey="toll" stackId="1" stroke="#C70039" fill="#C70039" />
+                                            <Area type="monotone" name="Alimentação" dataKey="feeding" stackId="1" stroke="#900C3F" fill="#900C3F" />
+                                            <Area type="monotone" name="Hospedagem" dataKey="accommodation" stackId="1" stroke="#1F618D" fill="#1F618D" />
+                                            <Area type="monotone" name="Materiais" dataKey="materials" stackId="1" stroke="#28B463" fill="#28B463" />
                                             <Area type="monotone" name="Imposto, grau de risco, etc" dataKey="others" stackId="1" stroke="#ffc658" fill="#ffc658" />
                                             <Area type="monotone" name="Valor total da OS" dataKey="totalValueOS" stackId="1" stroke="#5c34f4" fill="#5c34f4" />
                                         </AreaChart>
@@ -144,7 +148,7 @@ export default function Dashboard() {
                                 </div>
                                 <div className={styles.topMainGraphsDivs}>
                                     <h2>Valor total por cliente</h2>
-                                    <LineChart width={450} height={300} data={topClients} className={styles.mainChart}>
+                                    <LineChart width={500} height={350} data={topClients} className={styles.mainChart}>
                                         <XAxis dataKey="clientName" />
                                         <YAxis />
                                         <Tooltip
@@ -152,6 +156,7 @@ export default function Dashboard() {
                                                 value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                                             }
                                         />
+                                        <Line type="monotone" name="Cliente" dataKey="clientName" stroke="#3c2197" />
                                         <Line type="monotone" name="Valor de todas OS" dataKey="fullOsValue" stroke="#26bc6a" />
                                     </LineChart>
                                 </div>
@@ -159,7 +164,7 @@ export default function Dashboard() {
 
                             <div>
                                 <h2>Quantidade de OS por dia</h2>
-                                <ResponsiveContainer className={styles.mainChart} height={270}>
+                                <ResponsiveContainer className={styles.mainChart} height={350}>
                                     <LineChart data={processedDataIn14Days}>
                                         <CartesianGrid strokeDasharray="1 1" />
                                         <XAxis dataKey="date" />
@@ -174,7 +179,7 @@ export default function Dashboard() {
 
                             <div>
                                 <h2>Quantidade de OS por cliente</h2>
-                                <ResponsiveContainer className={styles.mainChart} height={300}>
+                                <ResponsiveContainer className={styles.mainChart} height={350}>
                                     <BarChart data={clientOccurrences}>
                                         <CartesianGrid strokeDasharray="1 1" />
                                         <XAxis dataKey="clientName" />
