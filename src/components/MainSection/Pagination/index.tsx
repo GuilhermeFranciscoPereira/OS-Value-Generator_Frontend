@@ -5,12 +5,13 @@ import useGetAllOS from '@/hooks/Apis/Get/useGetAllOS';
 type PaginationProps = {
     currentPage: number;
     toSetPage: (page: number) => void;
+    isMockData?: boolean;
 };
 
-export default function Pagination({ currentPage, toSetPage }: PaginationProps) {
+export default function Pagination({ currentPage, toSetPage, isMockData }: PaginationProps) {
     const { data } = useGetAllOS();
     const { FiltersHowActive } = useFiltersContext();
-    const totalPages: number = data ? Math.floor((data?.length / 6) + 1) : 0;
+    const totalPages: number = data ? Math.floor((data?.length / 6) + 1) : !isMockData ? 0 : 1;
     
     if (FiltersHowActive) { return false };
 

@@ -1,13 +1,16 @@
 'use client';
 import styles from '@/components/Header/Header.module.css';
 import useGetAllOS from '@/hooks/Apis/Get/useGetAllOS';
-import useHeader from '@/hooks/useHeader';
+import useHeader from '@/hooks/Components/useHeader';
 import mockDatas from '@/services/mockDatas';
 import { useEffect } from 'react';
 
 export default function Header(): React.ReactNode {
     let { data } = useGetAllOS();
-    !data || data.length === 0 ? data = mockDatas.slice(0, 6) : data;
+    if (!data) {
+        data = mockDatas.slice(0, 6);
+    }
+    
     const { getMainClient, getTopEmployee, getTotalfullOsValue, mainClientCount, topEmployee, topEmployeeCount, totalfullOsValue, averagefullOsValue, mainClient } = useHeader();
 
     useEffect(() => {
@@ -32,7 +35,7 @@ export default function Header(): React.ReactNode {
                             <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5" />
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                         </svg>
-                        <p style={{color: "aqua"}}>{mainClientCount}</p>
+                        <p style={{ color: "aqua" }}>{mainClientCount}</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +67,7 @@ export default function Header(): React.ReactNode {
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#5c34f4" viewBox="0 0 16 16">
                             <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
                         </svg>
-                        <p style={{color: "#5c34f4"}}>{topEmployeeCount}</p>
+                        <p style={{ color: "#5c34f4" }}>{topEmployeeCount}</p>
                     </div>
                 </div>
             </div>

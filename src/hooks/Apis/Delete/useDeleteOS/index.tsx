@@ -19,18 +19,20 @@ export default function useDeleteOS() {
         onSuccess: () => {
             showToast({ message: `OS deletada com sucesso!`, backgroundColor: "#3bb448" });
             refetchTheGetAllOS();
+            toggleModalState(false);
         },
         onError: (error: Error) => {
             showToast({ message: `Não foi possível deletar a OS. Erro: ${error.message}`, backgroundColor: "#d83734" });
             refetchTheGetAllOS();
+            toggleModalState(false);
         },
     });
 
     const deleteOS = (id: number) => {
         toSetModalContent(
             <>
-            <style>
-                {`
+                <style>
+                    {`
                 h2 {
                     margin: 30px;
                 }
@@ -53,13 +55,13 @@ export default function useDeleteOS() {
                     transform: scale(1.03);
                 }
             `}
-            </style>
-            <h2>Você tem certeza que deseja excluir essa OS?</h2>
-            <div>
-                <button className='buttonDelete' onClick={() => mutation.mutate(id)}>
-                    Sim, eu quero deletar essa OS!
-                </button>
-            </div>
+                </style>
+                <h2>Você tem certeza que deseja excluir essa OS?</h2>
+                <div>
+                    <button className='buttonDelete' onClick={() => { mutation.mutate(id) }}>
+                        Sim, eu quero deletar essa OS!
+                    </button>
+                </div>
             </>
         )
 

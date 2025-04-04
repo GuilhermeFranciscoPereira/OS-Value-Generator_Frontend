@@ -1,7 +1,8 @@
 'use client'
+import Link from 'next/link';
 import Image from 'next/image';
 import ProteltLogo from '@/assets/proteltlogo-Purple.png';
-import useSidebar from '@/hooks/useSidebar';
+import useSidebar from '@/hooks/Components/useSidebar';
 import styles from '@/components/Sidebar/Sidebar.module.css';
 import useGetByClientName from '@/hooks/Apis/Get/useGetByClientName';
 
@@ -17,7 +18,7 @@ export default function Sidebar(): React.ReactNode {
                     <p>Protelt Sistemas de Segurança</p>
                 </div>
                 <div className={styles.headlineImage}>
-                    <Image src={ProteltLogo} alt='Logo da protelt' height={80} width={80} />
+                    <Image src={ProteltLogo} alt='Logo da protelt' height={65} width={65} />
                 </div>
             </div>
 
@@ -40,14 +41,14 @@ export default function Sidebar(): React.ReactNode {
                             </svg>
                         </div>
                     </li>
-                    <a href="/Dashboard">
+                    <Link href="/Dashboard">
                         <li>
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
                                 <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z" />
                             </svg>
                             <p>Dashboard</p>
                         </li>
-                    </a>
+                    </Link>
                     <li onClick={() => functionToCreateNewOS()}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5" />

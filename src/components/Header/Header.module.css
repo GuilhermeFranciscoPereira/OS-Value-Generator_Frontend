@@ -12,19 +12,21 @@
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    height: 90%;
+    height: 100%;
+    margin-top: 10px;
     width: 32%;
-    padding: 15px 10px;
+    padding: 5px 20px;
     font-weight: 700;
     border-radius: 40px;
     border: 2px solid var(--Grey-Primary);
+    box-shadow: 1px 1px 1px var(--Grey-Primary);
     cursor: pointer;
     transition: .2s ease-in-out;
 }
 
 .header > div:hover {
-    transform: scale(1.02);
     border: 2px solid var(--Purple-Secondary);
+    transform: scale(1.02);
 }
 
 .header > div > h2 {
