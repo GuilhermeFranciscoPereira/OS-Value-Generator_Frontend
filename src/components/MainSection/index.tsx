@@ -15,13 +15,21 @@ type ArrayWithDatasProps = {
 };
 
 export default function MainSection(): React.ReactNode {
-    const { fetchDataById } = useGetById();
-    const { deleteOS } = useDeleteOS();
     let { data, page, toSetPage } = useGetAllPerPage();
-    data?.length === 0 ? data : data = mockDatas.slice(0, 6);
+    const { deleteOS } = useDeleteOS();
+    const { fetchDataById } = useGetById();
     const { FiltersHowActive, FiltersContent } = useFiltersContext();
+    let isMockDataTrue: boolean = false;
+
+    if (!data) {
+        data = mockDatas.slice(0, 6);
+        page = page;
+        toSetPage = toSetPage;
+        isMockDataTrue = true;
+    }
+
     let ArrayWithDatas: Array<ArrayWithDatasProps> = data ? data : [];
-    FiltersHowActive ? ArrayWithDatas = FiltersContent : data;
+    if (FiltersHowActive) { ArrayWithDatas = FiltersContent }
 
     return (
         <main className={styles.mainSection}>
@@ -71,7 +79,7 @@ export default function MainSection(): React.ReactNode {
                         }
                     </tbody>
                 </table>
-                <Pagination key={page} currentPage={page} toSetPage={toSetPage}></Pagination>
+                <Pagination key={page} currentPage={page} toSetPage={toSetPage} isMockData={isMockDataTrue ? true : false}></Pagination>
             </>
         </main>
     )

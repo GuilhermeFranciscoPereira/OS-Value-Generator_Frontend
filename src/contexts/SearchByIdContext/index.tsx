@@ -5,6 +5,9 @@ type ContentOsProps = {
     employees: string;
     clientName: string;
     fullOsValue: number;
+    toll: number;
+    feeding: number;
+    accommodation: number;
     degreeOfRisk: number;
     materialsValue: number;
     fullKM: number;

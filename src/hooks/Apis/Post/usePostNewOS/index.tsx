@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useToastContext } from '@/contexts/ToastContext';
 import { useModalContext } from '@/contexts/ModalContext';
 import useGetAllOS from '../../Get/useGetAllOS';
+import calculateAllOSValue from '@/services/calculateAllOSValue';
 
 type FormDataProps = {
   employees: Array<string>;
@@ -13,6 +14,9 @@ type FormDataProps = {
   fullKM: string | number;
   workedTime: string | number;
   materialsValue: string | number;
+  toll: string | number;
+  feeding: string | number;
+  accommodation: string | number;
   degreeOfRisk: string | number;
 };
 
@@ -23,6 +27,9 @@ type DatasToPostInBackEndProps = {
   degreeOfRisk: string | number;
   materialsValue: string | number;
   fullKM: string | number;
+  toll: string | number;
+  feeding: string | number;
+  accommodation: string | number;
   workedTime: string | number;
   employeesValue: number;
 };
@@ -32,14 +39,18 @@ const schema = z.object({
   clientName: z.string().min(1, 'Nome do cliente é obrigatório!'),
   fullKM: z.union([z.number().min(1, 'KM total deve ser pelo menos 1'), z.string()]),
   workedTime: z.union([z.number().min(1, 'Tempo trabalhado deve ser pelo menos 1 minuto'), z.string()]),
+  toll: z.union([z.number(), z.string()]),
+  feeding: z.union([z.number(), z.string()]),
+  accommodation: z.union([z.number(), z.string()]),
   degreeOfRisk: z.union([z.number().min(1, 'Grau de risco deve ser de pelo menos 1 e no máximo 5!').max(5, 'Grau de risco deve ser de pelo menos 1 e no máximo 5!'), z.string()]),
   materialsValue: z.union([z.number(), z.string()]),
 });
 
 export default function usePostOS() {
   const { showToast } = useToastContext();
-  const { toggleModalState } = useModalContext();
   const { refetchTheGetAllOS } = useGetAllOS();
+  const { toggleModalState } = useModalContext();
+  const { calculateTotalOSValue, } = calculateAllOSValue();
 
   const options: Array<{ value: string; label: string }> = [
     { value: 'Adilson', label: 'Adilson' },
@@ -61,56 +72,32 @@ export default function usePostOS() {
       clientName: '',
       fullKM: '',
       workedTime: '',
+      toll: 0,
+      feeding: 0,
+      accommodation: 0,
       degreeOfRisk: '',
-      materialsValue: '',
+      materialsValue: 0,
     },
   });
 
   const customStylesToTheMultiForm = {
-    control: (provided: any, state: any) => ({
-      ...provided,
-      backgroundColor: 'transparent',
-      border: '1px solid #5c34f4',
-      '&:hover': {
-        borderColor: '#5c34f4',
-      },
+    control: (provided: any) => ({
+      ...provided, backgroundColor: 'transparent', border: '1px solid #5c34f4', '&:hover': { borderColor: '#5c34f4', },
     }),
     menu: (provided: any) => ({
-      ...provided,
-      border: '1px solid #5c34f4',
-      backgroundColor: '#fff',
+      ...provided, border: '1px solid #5c34f4', backgroundColor: '#fff',
     }),
     option: (provided: any, state: { isSelected: any; isFocused: any; }) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? 'transparent' : state.isFocused ? '#5c34f4' : '#ddd',
-      color: state.isSelected || state.isFocused ? 'white' : '#333',
-      borderColor: '#5c34f4',
-      fontSize: state.isSelected ? '18px' : '18px',
-      fontWeight: state.isSelected ? 'bold' : '500',
-      '&:hover': {
-        backgroundColor: '#5c34f4',
-        color: 'white',
-      },
+      ...provided, backgroundColor: state.isSelected ? 'transparent' : state.isFocused ? '#5c34f4' : '#ddd', color: state.isSelected || state.isFocused ? 'white' : '#333', borderColor: '#5c34f4', fontSize: state.isSelected ? '18px' : '18px', fontWeight: state.isSelected ? 'bold' : '500', '&:hover': { backgroundColor: '#5c34f4', color: 'white', },
     }),
     placeholder: (provided: any) => ({
-      ...provided,
-      color: '#aaa',
+      ...provided, color: '#aaa',
     }),
     multiValueRemove: (provided: any) => ({
-      ...provided,
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: '#e74c3c',
-        color: 'white',
-      },
+      ...provided, cursor: 'pointer', ':hover': { backgroundColor: '#e74c3c', color: 'white', },
     }),
     clearIndicator: (provided: any) => ({
-      ...provided,
-      cursor: 'pointer',
-      color: '#e74c3c',
-      '&:hover': {
-        color: '#e74c3c',
-      },
+      ...provided, cursor: 'pointer', color: '#e74c3c', '&:hover': { color: '#e74c3c', },
     }),
   };
 
@@ -139,27 +126,21 @@ export default function usePostOS() {
     },
   });
 
-  function submitForm(data: FormDataProps): void {
-    const hourlyRates: { [key: string]: number } = { Adilson: 9.90, Daniel: 7.90, Eliseu: 4.90, Kaique: 9.90, Kauã: 12.90, Kleber: 7.90, Joas: 14.90, Matheus: 7.90, Patric: 10.90, Wesley: 11.90 };
-    const fullOsValue: number = Number(data.fullKM) * Number(data.workedTime);
-
-    let employeesValue: number = 0;
-    data.employees.forEach(name => {
-      const matchingName = Object.keys(hourlyRates).find(key => key.trim().toLowerCase() === name.trim().toLowerCase());
-      if (matchingName) {
-        employeesValue += hourlyRates[matchingName]
-      };
-    });
+  function submitForm(data: FormDataProps) {
+    const { total, employeesValue } = calculateTotalOSValue(data.employees, Number(data.workedTime), Number(data.degreeOfRisk), Number(data.fullKM), Number(data.toll), Number(data.feeding), Number(data.accommodation), Number(data.materialsValue));
 
     const formData: DatasToPostInBackEndProps = {
       employees: data.employees.join(", "),
       clientName: data.clientName.replace(/\b\w/g, char => char.toUpperCase()).replace(/\B\w/g, char => char.toLowerCase()),
-      fullOsValue: fullOsValue,
+      fullOsValue: total,
       degreeOfRisk: Number(data.degreeOfRisk),
       materialsValue: Number(data.materialsValue),
+      accommodation: Number(data.accommodation),
+      toll: Number(data.toll),
+      feeding: Number(data.feeding),
       fullKM: Number(data.fullKM),
       workedTime: Number(data.workedTime),
-      employeesValue: employeesValue
+      employeesValue: employeesValue,
     };
 
     mutation.mutate(formData);

@@ -18,6 +18,7 @@
 }
 
 .formGroup {
+    position: relative;
     margin-bottom: 20px;
 }
 
@@ -65,6 +66,50 @@
 .submitBtn:hover {
     transform: scale(1.05);
     background-color: var(--Purple-Primary);
+}
+
+.formGroup > select, .formGroup > input[type="number"]::-webkit-outer-spin-button,
+.formGroup > select, .formGroup > input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.infoIcon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-30%);
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    visibility: hidden;
+    width: 300px;
+    height: fit-content;
+    color: #fff;
+    text-align: left;
+    padding: 10px 20px;
+    border-radius: 20px;
+    bottom: 100%;
+    right: 0;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+    background-color: var(--Grey-Primary);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip > a {
+    color: #ccc;
+    font-size: 1.1rem;
+}
+
+.infoIcon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
 
 @media (max-width: 480px) {

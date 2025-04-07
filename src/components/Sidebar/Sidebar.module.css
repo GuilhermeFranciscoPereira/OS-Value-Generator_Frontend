@@ -101,22 +101,21 @@
         height: fit-content;
         width: 100vw;
         border-bottom: 1px solid var(--Grey-Primary);
+        position: static;
     }
     
-    .aside > .options > ul > li {
-        font-size: 1.7rem;
+    .aside > .options > ul > li, .aside > .options > ul > a > li {
+        font-size: 1rem;
         padding: 10px 0px;
         margin: 10px 10px;
         border-bottom: 1px solid var(--Grey-Primary);
     }
-
-    .inputContainer {
-        width: 100vw;
-        border-radius: 12px;
-    }
-
+    
     .inputContainer > input {
-        font-size: 1.7rem;
+        width: 90%;
+        font-size:18px;
+        border: none;
+        outline: none;
     }
     
 }

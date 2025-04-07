@@ -1,11 +1,9 @@
-import { useState, useMemo } from "react";
-import useGetAllOS from "@/hooks/Apis/Get/useGetAllOS";
-import mockDatas from "@/services/mockDatas";
 import { Sector } from "recharts";
+import { useState, useMemo } from "react";
+import mockDatas from "@/services/mockDatas";
 
 export default function useDashboard() {
-  let { data } = useGetAllOS();
-  !data || data.length === 0 ? data = mockDatas : data;
+  const data = mockDatas;
 
   const [selectedEmployee, setSelectedEmployee] = useState<string | null>(null);
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
@@ -46,14 +44,17 @@ export default function useDashboard() {
   }, [data, selectedEmployee, selectedClient]);
 
   const aggregatedData = useMemo(() => {
-    const clientMap: Record<string, { clientName: string; fullOsValue: number; employeesValue: number; degreeOfRisk: number; fullKM: number; materialsValue: number; dateAndHourOfCreationOS: string }> = {};
+    const clientMap: Record<string, { clientName: string; fullOsValue: number; toll: number; feeding: number; accommodation: number; employeesValue: number; degreeOfRisk: number; fullKM: number; materialsValue: number; dateAndHourOfCreationOS: string }> = {};
 
-    filteredData.forEach(({ clientName, fullOsValue, employeesValue, fullKM, degreeOfRisk, materialsValue, dateAndHourOfCreationOS }) => {
+    filteredData.forEach(({ clientName, fullOsValue, toll, feeding, accommodation, employeesValue, fullKM, degreeOfRisk, materialsValue, dateAndHourOfCreationOS }) => {
       if (!clientMap[clientName]) {
-        clientMap[clientName] = { clientName, fullOsValue: 0, employeesValue: 0, fullKM: 0, degreeOfRisk: 0, materialsValue: 0, dateAndHourOfCreationOS: "" };
+        clientMap[clientName] = { clientName, fullOsValue: 0, toll: 0, feeding: 0, accommodation: 0, employeesValue: 0, fullKM: 0, degreeOfRisk: 0, materialsValue: 0, dateAndHourOfCreationOS: "" };
       }
 
       clientMap[clientName].fullOsValue += fullOsValue;
+      clientMap[clientName].toll += toll;
+      clientMap[clientName].feeding += feeding;
+      clientMap[clientName].accommodation += accommodation;
       clientMap[clientName].employeesValue += employeesValue;
       clientMap[clientName].fullKM += fullKM;
       clientMap[clientName].degreeOfRisk += degreeOfRisk;
@@ -66,10 +67,12 @@ export default function useDashboard() {
 
   const riskCounts: Record<string, number> = { "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 };
 
-  data.forEach(({ degreeOfRisk }) => {
-    const key = degreeOfRisk.toString();
-    riskCounts[key] += 1;
-  });
+  if (data) {
+    data.forEach(({ degreeOfRisk }) => {
+      const key = degreeOfRisk.toString();
+      riskCounts[key] += 1;
+    });
+  }
 
   const renderActiveShape = (props: any) => {
     const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
@@ -132,21 +135,27 @@ export default function useDashboard() {
     return Object.values(last7Days);
   }, [filteredData]);
 
-  const processData = (data: { clientName: string; employeesValue: number; materialsValue: number; fullOsValue: number; fullKM: number }[]): { name: string; employees: number; materials: number; fullKM: number; others: number; totalValueOS: number }[] => {
+  const processData = (): { name: string; employees: number; toll: number; feeding: number; accommodation: number; materials: number; fullKM: number; others: number; totalValueOS: number }[] => {
     const groupedData: Record<string, {
       name: string;
       employees: number;
+      toll: number;
+      feeding: number;
+      accommodation: number;
       materials: number;
       fullKM: number;
       others: number;
       totalValueOS: number;
     }> = {};
 
-    topClients.forEach(({ clientName, employeesValue, materialsValue, fullOsValue, fullKM }) => {
+    topClients.forEach(({ clientName, employeesValue, toll, feeding, accommodation, materialsValue, fullOsValue, fullKM }) => {
       if (!groupedData[clientName]) {
         groupedData[clientName] = {
           name: clientName,
           employees: 0,
+          toll: 0,
+          feeding: 0,
+          accommodation: 0,
           materials: 0,
           fullKM: 0,
           others: 0,
@@ -155,9 +164,12 @@ export default function useDashboard() {
       }
 
       groupedData[clientName].employees += (employeesValue);
+      groupedData[clientName].toll += (toll);
+      groupedData[clientName].feeding += (feeding);
+      groupedData[clientName].accommodation += (accommodation);
       groupedData[clientName].materials += materialsValue;
-      groupedData[clientName].fullKM += (fullKM);
-      groupedData[clientName].others += fullOsValue - (employeesValue + materialsValue);
+      groupedData[clientName].fullKM += (fullKM * 1.4);
+      groupedData[clientName].others += fullOsValue - (employeesValue + toll + feeding + accommodation + materialsValue + ( fullKM * 1.4 ));
       groupedData[clientName].totalValueOS += fullOsValue;
     });
 
@@ -211,15 +223,11 @@ export default function useDashboard() {
 
   const onPieEnter = (_: any, index: number) => setActiveIndex(index);
 
-  const formatDate = (date: string | number | Date) => {
-    return new Date(date).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
-  };
-
   const processedDataIn14Days = useMemo(() => {
     const today = new Date();
     const last14Days = new Array(14).fill(0).map((_, i) => {
       const date = new Date();
-      date.setDate(today.getDate() - ( 13 - i));
+      date.setDate(today.getDate() - (13 - i));
 
       const formattedDate = `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}`;
 
